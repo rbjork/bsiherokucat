@@ -1,0 +1,9 @@
+
+chardet==4.0.0
+Flask
+Flask-Mail==0.9.1
+Flask-Session==0.3.2
+Jinja2
+MarkupSafe
+requests==2.25.1
+urllib3==1.26.5
