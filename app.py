@@ -34,7 +34,7 @@ def bsicatalog():
 # Gets around issue of Session probs.  But this does not give quote numbers
 @app.route('/requestforquote', methods=['POST','GET'])
 def request4quote():
-	pdb.set_trace()
+	
 	try:
 		counties1 = json.loads(request.form.getlist('counties')[0])
 		#counties = [json.loads(cty) for cty in counties1]
@@ -48,7 +48,7 @@ def request4quote():
 # This is the version that should be used to get quote numbers - it uses session object.
 @app.route('/requestforquote2', methods=['POST','GET'])
 def request4quote2():
-	pdb.set_trace()
+
 	try:
 		letters = 'ABCDEFGHIJKLMNOPQRTSUVWXYZ'
 		bsicode = []
