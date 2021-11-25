@@ -28,7 +28,7 @@ SHOPPING_CART = "shoppingcart"
 
 @app.route('/')
 def bsicatalog():
-	return render_template("index.html")
+	return render_template("ParcelCatalog.html")
 
 
 # Gets around issue of Session probs.  But this does not give quote numbers
