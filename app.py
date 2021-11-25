@@ -6,13 +6,16 @@ from Pricing import Pricing
 import random
 import pdb
 import json
+import random
 
 app = Flask(__name__)
 
 
 sess = Session()
+st = [c for c in "abcdefghijklmnopqrstuvwxyz"]
+random.shuffle(st)
 
-SHOPPING_CART = "shoppingcart"
+SHOPPING_CART = ''.join(st[0:15])
 
 # from flask_mail import Mail
 # mail = Mail(app)
