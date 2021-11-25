@@ -34,7 +34,7 @@ def bsicatalog():
 # Gets around issue of Session probs.  But this does not give quote numbers
 @app.route('/requestforquote', methods=['POST','GET'])
 def request4quote():
-	
+
 	try:
 		counties1 = json.loads(request.form.getlist('counties')[0])
 		#counties = [json.loads(cty) for cty in counties1]
@@ -118,5 +118,5 @@ def sendquoterequest():
 if __name__ == "__main__":
 	app.secret_key = 'seethatwaveinthesurf'
 	app.config['SESSION_TYPE'] = 'filesystem'
-	##sess.init_app(app)
+	sess.init_app(app)
 	app.run()
