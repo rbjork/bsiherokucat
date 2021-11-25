@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BSI Quote Request Form</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+	<meta http-equiv=Expires content="Tue, 01 Jan 2000 12:12:12 GMT">
+	<meta http-equiv=Pragma content=no-cache>
+	<meta name=description content="ParceAtlas Lite, Request for ParcelAtlas Lite Extended Attirbute and API"/>
+<!--
+	<LINK REL=stylesheet HREF="http://www.boundarysolutions.com/MainStyle.css" TYPE="text/css">
+-->
+	<link rel="shortcut icon" href="http://www.boundarysolutions.com/images/favicon.ico">
+
+
+
+
+<style type="text/css">
+
+P {
+	font-size:11px;
+
+	font-family: verdana, arial, sans-serif;
+
+	text-align: left;
+
+	color: #1D15C3;
+
+	line-height: 16px;
+
+	font-weight:480;
+
+	text-indent: 1em;
+
+	margin-left: 5%;
+
+	margin-right: 5%;
+
+}
+
+H1 {
+
+	font-size: 110%;
+
+	font-family: verdana, arial, sans-serif;
+
+	text-align: center;
+
+	color: #003399;
+
+	font-weight: bold;
+
+	margin-left: 5%;
+
+	line-height: 24px;
+
+}
+
+HR {
+	font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 3px; color: red;
+	width: 95%}
+
+}
+
+.pricetable{
+    background-color:white;
+    border: 1px solid black;
+    width: 200px;
+    horiz-align: right;
+}
+
+li {
+	margin-right: 2em;
+	}
+
+.confrmeitems{
+	font-size:14px;
+	border:hidden;
+}
+
+
+</style>
+
+<!--<link type="text/css" rel=stylesheet href=state_style.css>-->
+    <style>
+
+  	table {
+  		background:#003399;
+        font-family: Calibri, Verdana, Arial, sans-seri;
+  	}
+    body {
+        font-family: Calibri, Verdana, Arial, sans-seri;
+    }
+    table td{
+      padding-left: 20px;
+      padding-top:5px;
+      padding-bottom: 5px;
+    }
+    form.cmxform fieldset {
+        margin-bottom: 10px;
+    }
+    form.cmxform legend {
+        padding: 0 2px;
+        font-weight: bold;
+    }
+    form.cmxform label {
+        display: inline-block;
+        line-height: 1.8;
+        vertical-align: top;
+    }
+    form.cmxform fieldset ol {
+        margin: 0;
+        padding: 0;
+    }
+    form.cmxform fieldset li {
+        list-style: none;
+        padding: 5px;
+        margin: 0;
+    }
+    form.cmxform fieldset fieldset {
+      border: none;
+      margin: 3px 0 0;
+    }
+    form.cmxform fieldset fieldset legend {
+      padding: 0 0 5px;
+      font-weight: normal;
+    }
+    form.cmxform fieldset fieldset label {
+      display: block;
+      width: auto;
+    }
+    form.cmxform em {
+      font-weight: bold;
+      font-style: normal;
+      color: #f00;
+    }
+    form.cmxform label {
+      width: 120px; /* Width of labels */
+    }
+    form.cmxform fieldset fieldset label {
+      margin-left: 123px; /* Width plus 3 (html space) */
+    }
+</style>
+</head>
+<body  bgcolor="#1D15C3" style="background: url('/static/images/parcelbackground.JPG');" >
+<br>
+<form enctype='multipart/form-data' id="requestform"  action='/sendquoterequest' method=POST>
+
+
+
+<center>
+
+<!--<img src="images/BSI_banner_order.jpg"/>-->
+
+
+<TABLE BORDER=1 CELLPADDING=0 WIDTH="1051" align="center" id="">
+<tr><td colspan="3"><center><a href="https://www.boundarysolutions.com">
+
+    <img id="headerimage" src="/static/images/orderformheader.png"  align="center"  />
+</a></center></td> </tr>
+<tr>
+<td colspan=3 bgcolor="#D6DFEF" height=16 width="100%" bordercolor="#FFFFFF"><font size=1 face=Verdana>* indicates required field. </font></td>
+</tr>
+
+<tr>
+<td colspan=3 style="line-height: 2em; background: #EFF3F7; bordercolor: #FFFFFF; font-family: Verdana; color: #003399; font-size: 85%;">*First Name <input name=FirstName size=15 type="text"  required>&nbsp;&nbsp;*Last Name <input type="text" name=LastName size=15  required>&nbsp;&nbsp;*Email <input name=Email size=30 type="email"  required>&nbsp;&nbsp; *Phone: <input  name=Phone type="text"  size=14 required>
+</td>
+</tr>
+<tr style="background: #EFF3F7">
+<td colspan=3 style="line-height: 2em; background: #003399; bordercolor: #FFFFFF; font-family: Verdana; color: #FFFFFF; size: 10px;">*Org:<input type="text" name=Org size=20 required>&nbsp;&nbsp;Address <input name=Address1 size=30 type="text" >&nbsp;*City <input name=City size=20  required type="text" >&nbsp;&nbsp;&nbsp;&nbsp;*State <select required  name=State><OPTION SELECTED>Select State</OPTION>
+
+<OPTION>Alabama
+
+<OPTION>Alaska
+
+<OPTION>Arizona
+
+<OPTION>Arkansas
+
+<OPTION>California
+
+<OPTION>Colorado
+
+<OPTION>Connecticut
+
+<OPTION>Delaware
+
+<OPTION>District of Columbia
+
+<OPTION>Florida
+
+<OPTION>Georgia
+
+<OPTION>Hawaii
+
+<OPTION>Idaho
+
+<OPTION>Illinois
+
+<OPTION>Indiana
+
+<OPTION>Iowa
+
+<OPTION>Kansas
+
+<OPTION>Kentucky
+
+<OPTION>Louisiana
+
+<OPTION>Maine
+
+<OPTION>Maryland
+
+<OPTION>Massachusetts
+
+<OPTION>Michigan
+
+<OPTION>Minnesota
+
+<OPTION>Mississippi
+
+<OPTION>Missouri
+
+<OPTION>Montana
+
+<OPTION>Nebraska
+
+<OPTION>Nevada
+
+<OPTION>New Hampshire
+
+<OPTION>New Jersey
+
+<OPTION>New Mexico
+
+<OPTION>New York
+
+<OPTION>North Carolina
+
+<OPTION>North Dakota
+
+<OPTION>Ohio
+
+<OPTION>Oklahoma
+
+<OPTION>Oregon
+
+<OPTION>Pennsylvania
+
+<OPTION>Rhode Island
+
+<OPTION>South Carolina
+
+<OPTION>South Dakota
+
+<OPTION>Tennessee
+
+<OPTION>Texas
+
+<OPTION>Utah
+
+<OPTION>Vermont
+
+<OPTION>Virginia
+
+<OPTION>Washington
+
+<OPTION>West Virginia
+
+<OPTION>Wisconsin
+
+<OPTION>Wyoming</select>
+
+&nbsp;&nbsp;ZIP:<INPUT NAME=Zip SIZE=12 required type="text" ><!--Country: <select name=Country>
+
+<OPTION SELECTED> United States </OPTION>
+
+<option value=Albania>Albania</option>
+
+<option value=Algeria>Algeria</option>
+
+<option value="American Samoa">American Samoa</option>
+
+<option value=Andorra>Andorra </option>
+
+<option value=Angola>Angola</option>
+
+<option value="Antigua & Barbuda">Antigua & Barbuda</option>
+
+<option value="Netherlands Antilles">Netherlands Antilles</option>
+
+<option value=Argentina>Argentina</option>
+
+<option value=Aruba>Aruba</option>
+
+<option value=Australia>Australia</option>
+
+<option value=Austria>Austria</option>
+
+<option value=Azores>Azores</option>
+
+<option value=Bahamas>Bahamas</option>
+
+<option value=Bahrain>Bahrain</option>
+
+<option value=Bangladesh>Bangladesh</option>
+
+<option value=Barbados>Barbados</option>
+
+<option value=Belarus>Belarus</option>
+
+<option value=Belgium>Belgium</option>
+
+<option value=Belize>Belize</option>
+
+<option value=Benin>Benin</option>
+
+<option value=Bermuda>Bermuda</option>
+
+<option value=Bolivia>Bolivia</option>
+
+<option value=Bonaire>Bonaire</option>
+
+<option value=Botswana>Botswana</option>
+
+<option value="British Virgin Islands">British Virgin Islands</option>
+
+<option value=Brazil>Brazil</option>
+
+<option value=Brunei>Brunei</option>
+
+<option value=Bulgaria>Bulgaria</option>
+
+<option value="Burkina Faso">Burkina Faso</option>
+
+<option value=Burundi>Burundi</option>
+
+<option value=Cambodia>Cambodia</option>
+
+<option value=Cameroon>Cameroon</option>
+
+<option value=Canada>Canada</option>
+
+<option value="Canary Islands">Canary Islands</option>
+
+<option value="Cape Verde">Cape Verde</option>
+
+<option value="Cayman Islands">Cayman Islands</option>
+
+<option value="Central African Republic">Central African Rep</option>
+
+<option value=Chad>Chad</option>
+
+<option value="Channel Islands">Channel Islands</option>
+
+<option value=Chile>Chile</option>
+
+<option value="Peoples Republic of China">China</option>
+
+<option value=Colombia>Colombia</option>
+
+<option value=Congo>Congo</option>
+
+<option value="Cook Islands">Cook Islands</option>
+
+<option value="Costa Rica">Costa Rica</option>
+
+<option value=Croatia>Croatia</option>
+
+<option value=Cuba>Cuba</option>
+
+<option value=Curacao>Curacao</option>
+
+<option value=Cyprus>Cyprus</option>
+
+<option value="Czech Republic">Czech Republic</option>
+
+<option value=Denmark>Denmark</option>
+
+<option value=Djibouti>Djibouti</option>
+
+<option value=Dominica>Dominica</option>
+
+<option value="Dominican Republic">Dominican Republic</option>
+
+<option value=Ecuador>Ecuador</option>
+
+<option value=Egypt>Egypt</option>
+
+<option value="El Salvador">El Salvador</option>
+
+<option value=England>England</option>
+
+<option value="Equatorial Guinea">Equatorial Guinea</option>
+
+<option value=Eritrea>Eritrea</option>
+
+<option value=Estonia>Estonia</option>
+
+<option value=Ethiopia>Ethiopia</option>
+
+<option value="Faeroe Islands">Faeroe Islands</option>
+
+<option value=Fiji>Fiji</option>
+
+<option value=Finland>Finland</option>
+
+<option value="French Polynesia">French Polynesia</option>
+
+<option value=France>France</option>
+
+<option value="French Guiana">French Guiana</option>
+
+<option value=Gabon>Gabon</option>
+
+<option value=Gambia>Gambia</option>
+
+<option value=Germany>Germany</option>
+
+<option value=Ghana>Ghana</option>
+
+<option value=Gibraltar>Gibraltar</option>
+
+<option value=Greece>Greece</option>
+
+<option value=Greenland>Greenland</option>
+
+<option value=Grenada>Grenada</option>
+
+<option value=Guadeloupe>Guadeloupe</option>
+
+<option value=Guam>Guam</option>
+
+<option value=Guatemala>Guatemala</option>
+
+<option value=Guinea>Guinea</option>
+
+<option value=Guinea-Bissau>Guinea-Bissau</option>
+
+<option value=Guyana>Guyana</option>
+
+<option value=Haiti>Haiti</option>
+
+<option value=Holland>Holland</option>
+
+<option value=Honduras>Honduras</option>
+
+<option value="Hong Kong">Hong Kong</option>
+
+<option value=Hungary>Hungary</option>
+
+<option value=Iceland>Iceland</option>
+
+<option value=India>India</option>
+
+<option value=Indonesia>Indonesia</option>
+
+<option value="Republic of Ireland">Rep of Ireland</option>
+
+<option value=Israel>Israel</option>
+
+<option value=Italy>Italy</option>
+
+<option value="Ivory Coast">Ivory Coast</option>
+
+<option value=Jamaica>Jamaica</option>
+
+<option value=Japan>Japan</option>
+
+<option value=Jordan>Jordan</option>
+
+<option value=Kazakhstan>Kazakhstan</option>
+
+<option value=Kenya>Kenya</option>
+
+<option value=Kiribati>Kiribati</option>
+
+<option value=Korea>Korea</option>
+
+<option value=Kuwait>Kuwait</option>
+
+<option value=Kyrgyzstan>Kyrgyzstan</option>
+
+<option value=Laos>Laos</option>
+
+<option value=Latvia>Latvia</option>
+
+<option value=Lebanon>Lebanon</option>
+
+<option value=Lesotho>Lesotho</option>
+
+<option value=Liberia>Liberia</option>
+
+<option value=Liechtenstein>Liechtenstein</option>
+
+<option value=Lithuania>Lithuania</option>
+
+<option value=Luxembourg>Luxembourg</option>
+
+<option value=Macau>Macau</option>
+
+<option value=Macedonia>Macedonia</option>
+
+<option value=Madagascar>Madagascar</option>
+
+<option value=Madeira>Madeira</option>
+
+<option value=Malawi>Malawi</option>
+
+<option value=Malaysia>Malaysia</option>
+
+<option value=Maldives>Maldives</option>
+
+<option value=Mali>Mali</option>
+
+<option value=Malta>Malta</option>
+
+<option value="Marshall Islands">Marshall Islands</option>
+
+<option value=Martinique>Martinique</option>
+
+<option value=Mauritania>Mauritania</option>
+
+<option value=Mauritius>Mauritius</option>
+
+<option value=Mexico>Mexico</option>
+
+<option value="Federated States of Micronesia">Micronesia</option>
+
+<option value=Monaco>Monaco</option>
+
+<option value=Montserrat>Montserrat</option>
+
+<option value=Morocco>Morocco</option>
+
+<option value=Mozambique>Mozambique</option>
+
+<option value=Myanmar>Myanmar</option>
+
+<option value="Northern Mariana Islands">No. Mariana Islands</option>
+
+<option value=Namibia>Namibia</option>
+
+<option value=Nepal>Nepal</option>
+
+<option value=Netherlands>Netherlands</option>
+
+<option value="New Caledonia">New Caledonia</option>
+
+<option value="New Zealand">New Zealand</option>
+
+<option value=Nicaragua>Nicaragua</option>
+
+<option value=Niger>Niger</option>
+
+<option value=Nigeria>Nigeria</option>
+
+<option value="Norfolk Island">Norfolk Island</option>
+
+<option value="Northern Ireland">Northern Ireland</option>
+
+<option value=Norway>Norway</option>
+
+<option value=Oman>Oman</option>
+
+<option value=Pakistan>Pakistan</option>
+
+<option value=Palau>Palau</option>
+
+<option value=Panama>Panama</option>
+
+<option value="Papua New Guinea">Papua New Guinea</option>
+
+<option value=Paraguay>Paraguay</option>
+
+<option value=Peru>Peru</option>
+
+<option value=Philippines>Philippines</option>
+
+<option value=Poland>Poland</option>
+
+<option value=Ponape>Ponape</option>
+
+<option value=Portugal>Portugal</option>
+
+<option value="Puerto Rico">Puerto Rico</option>
+
+<option value=Qatar>Qatar</option>
+
+<option value=Reunion>Reunion</option>
+
+<option value=Romania>Romania</option>
+
+<option value=Rota>Rota</option>
+
+<option value=Russia>Russia</option>
+
+<option value=Rwanda>Rwanda</option>
+
+<option value=Saba>Saba</option>
+
+<option value=Saipan>Saipan</option>
+
+<option value="Saudi Arabia">Saudi Arabia</option>
+
+<option value=Scotland>Scotland</option>
+
+<option value=Senegal>Senegal</option>
+
+<option value=Seychelles>Seychelles</option>
+
+<option value="Sierra Leone">Sierra Leone</option>
+
+<option value=Singapore>Singapore</option>
+
+<option value=Slovakia>Slovakia</option>
+
+<option value=Slovenia>Slovenia</option>
+
+<option value="Solomon Islands">Solomon Islands</option>
+
+<option value="South Africa">South Africa</option>
+
+<option value="South Korea">South Korea</option>
+
+<option value=Spain>Spain</option>
+
+<option value="Sri Lanka">Sri Lanka</option>
+
+<option value="St. Barthelemy">St. Barthelemy</option>
+
+<option value="St. Christopher">St. Christopher</option>
+
+<option value="St. Croix">St. Croix</option>
+
+<option value="St. Eustatius">St. Eustatius</option>
+
+<option value="St. John">St. John</option>
+
+<option value="St. Kitts & Nevis">St. Kitts & Nevis</option>
+
+<option value="St. Lucia">St. Lucia</option>
+
+<option value="St. Maarten">St. Maarten</option>
+
+<option value="St. Martin">St. Martin</option>
+
+<option value="St. Thomas">St. Thomas</option>
+
+<option value="St. Vincent and the Grenadines">St. Vincent/Grenadines</option>
+
+<option value=Sudan>Sudan</option>
+
+<option value=Suriname>Suriname</option>
+
+<option value=Swaziland>Swaziland</option>
+
+<option value=Sweden>Sweden</option>
+
+<option value=Switzerland>Switzerland</option>
+
+<option value=Syria>Syria</option>
+
+<option value=Tahiti>Tahiti</option>
+
+<option value=Taiwan>Taiwan</option>
+
+<option value=Tajikistan>Tajikistan</option>
+
+<option value=Tanzania>Tanzania</option>
+
+<option value=Thailand>Thailand</option>
+
+<option value=Tinian>Tinian</option>
+
+<option value=Togo>Togo</option>
+
+<option value=Tonga>Tonga</option>
+
+<option value=Tortola>Tortola</option>
+
+<option value="Trinidad &Tobago">Trinidad &Tobago</option>
+
+<option value=Truk>Truk</option>
+
+<option value=Tunisia>Tunisia</option>
+
+<option value=Turkey>Turkey</option>
+
+<option value="Turks & Caicos Islands">Turks & Caicos Is</option>
+
+<option value=Tuvalu>Tuvalu</option>
+
+<option value="US Virgin Islands">US Virgin Islands</option>
+
+<option value=Uganda>Uganda</option>
+
+<option value=Ukraine>Ukraine</option>
+
+<option value="Union Island">Union Island</option>
+
+<option value="United Arab Emirates">United Arab Emirates</option>
+
+<option value="United Kingdom">United Kingdom</option>
+
+<option value="United States">United States</option>
+
+<option value=Uruguay>Uruguay</option>
+
+<option value=Uzbekistan>Uzbekistan</option>
+
+<option value=Vanuatu>Vanuatu</option>
+
+<option value=Venezuela>Venezuela</option>
+
+<option value=Vietnam>Vietnam</option>
+
+<option value="Virgin Gorda">Virgin Gorda</option>
+
+<option value="Wake Island">Wake Island</option>
+
+<option value=Wales>Wales</option>
+
+<option value="Wallis & Futuna Islands">Wallis & Futuna Is</option>
+
+<option value="Western Samoa">Western Samoa</option>
+
+<option value=Yap>Yap</option>
+
+<option value="Republic of Yemen">Republic of Yemen</option>
+
+<option value=Zaire>Zaire</option>
+
+<option value=Zambia>Zambia</option>
+
+<option value=Zimbabwe>Zimbabwe</option>
+
+</select>-->&nbsp;&nbsp;
+</td>
+</tr>
+
+
+<tr>
+<td colspan=3 style="line-height: 2em; background: #ffffff; bordercolor: #FFFFFF; font-family: Verdana; color: #003399; size: 10px;">
+    DEPLOYMENT PREFERENCE: ARCGIS ONLINE: <input type="radio" value="argisonline" name="deploypref"/> DOWNLOAD: <input type="radio" value="download" name="deploypref" checked/> BOTH: <input type="radio" value="both" name="deploypref"/>
+    <br>Number of AGOL Users? <input type="text" name="usercount" size="2"> Up to 5 without increased price. <br>Comments: <TEXTAREA NAME=Comments ROWS=2 COLS=55></TEXTAREA>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" id="sendrequest" value="Send Request" style="font-size:16px; background-color:red; color:#FFF;" onmousedown="fillpricetable()">
+<input type=button value='Reset Form' id="resetform_btn" style="font-size:16px; background-color:lightgray; color:#000000;"><BR>
+</td>
+</tr>
+
+<tr><td colspan="2"  height=15>
+<p>
+<table  bgcolor="#ffffff" border='0' align="center" class="confrmeitems">
+<col width="60px">
+<col width="60px">
+<col width="300px">
+<col width="200px">
+<tr style="border:1px solid white"><th><font color="white">FIPS</font></th><th><font color="white">STATE</font></th><th><font color="white">COUNTY</font></th><th><font color="white">AVAILABILITY</font></th></tr>
+{% for county in counties %}
+	<tr bgcolor="#ffffff"><td >{{county.fip}}</td><td>{{county.state}}</td><td>{{county.county}}</td><td>{{county.availability}}</td></tr>
+{% endfor %}
+
+</table>
+</td><td style="vertical-align: top; color: white">
+    <table class="pricetable" id="pricetable" name="pricetable" style="width:100px; border: 2px solid black;">
+        <thead>
+        <tr><th>CATEGORY</th><th>NUMBER OF COUNTIES</th><th>PRICE</th></tr>
+        </thead>
+        <tbody style="border: 1px solid black; background-color: #eeeeee; color: #000;">
+        <tr><td>IN STOCK </td><td style="align-content: right;"> {{numinstock}}</td><td style="align-content: right;"> ${{ pricestock }}</td></tr>
+        <tr><td>IN STOCK ADD </td><td style="align-content: right;"> {{numnotinstock}}</td><td style="align-content: right;"> ${{ pricens }}</td></tr>
+        <tr><td style="align-content: right;">TOTAL </td><td>{{ numtotal }}</td><td> ${{ price }} </td></tr>
+        <tr><td colspan="3"><img style="alignment: right"  src="/static/images/priceschedule.png"  align="middle"  /></td></tr>
+        </tbody>
+    </table>
+
+    <input type="hidden" id="pricetabletext" name="pricetabletext" />
+</td></tr>
+
+<tr>
+<td colspan="2" style="horiz-align: right; alignment: right">
+
+</td><td></td></tr>
+
+    <tr><td colspan="3" >
+<TEXTAREA NAME=fipsorder  id=fipsorder ROWS=5 COLS=100 contenteditable="false"  style="display:none;">
+{% for county in counties %}
+	{{county.fip}}
+{% endfor %}
+</TEXTAREA></td></tr>
+</table>
+
+
+</form>
+<script type="text/javascript" language="JavaScript">
+    function fillpricetable(){
+
+        let tbl = $("#pricetable").text();
+        console.log("pricetable fill" + tbl);
+        $("#pricetabletext").val(tbl);
+    }
+</script>
+
+<script language=Javascript>
+    $('#resetform_btn').click(function(){
+      $('#requestform').find('input[type="text"]').each(function () {
+          $(this).prop('value', '');
+      });
+      $('#requestform').find('input[type="email"]').each(function () {
+          $(this).prop('value', '');
+      });
+      $('#requestform').find('TEXTAREA').each(function () {
+          $(this).prop('value', '');
+      })
+    });
+
+    //var BASE_URL = "http://django-env.ry5znseyax.us-west-1.elasticbeanstalk.com/";
+    var BASE_URL = "http://127.0.0.1:5000/";
+
+
+	/*$('#sendrequest').click(function(){
+         var picks = $('#fipsorder').html();
+         var jpicks = JSON.stringify(picks);
+
+
+         var name = $("input[name='FirstName']").html();
+         var email = "grbtxtmsg@gmail.com";
+         var phone = "14154797332";
+         var company = "BSI";
+
+         // csrfmiddlewaretoken: '{{csrf_token}}',
+         // url: 'https://z12t0wnq6e.execute-api.us-west-2.amazonaws.com/bsiorderequest/countymeta',
+         // url: BASE_URL + "countyparcels/emailrequest4quote",
+
+         $.ajax({
+             url: BASE_URL + "countyparcels/emailrequest4quote",
+             type: "POST",
+             method: "POST",
+             dataType: "json",
+             crossDomain: true,
+             contentType: "application/json; charset=utf-8",
+             headers: {
+                 "x-api-key":"0eup5py6mu4BU4AUpgXYv2nojcd14CauXT5gD99e"
+             },
+             data:{
+                 "name":name,
+                 "email":email,
+                 "phone":phone,
+                 "company":company,
+                 "counties":jpicks
+             },
+
+             success: function(data){
+                 console.info(data);
+                 window.location = BASE_URL + "countyparcels";
+             }
+         });
+	});*/
+
+</script>
+
+
+</body>
+</html>
