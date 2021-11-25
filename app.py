@@ -15,7 +15,7 @@ sess = Session()
 st = [c for c in "abcdefghijklmnopqrstuvwxyz"]
 random.shuffle(st)
 
-SHOPPING_CART = ''.join(st[0:15])
+SHOPPING_CART = "SHOPPINGCART"
 
 # from flask_mail import Mail
 # mail = Mail(app)
@@ -119,7 +119,7 @@ def sendquoterequest():
 
 
 if __name__ == "__main__":
-	app.secret_key = 'seethatwaveinthesurf'
+	app.secret_key = ''.join(st) #'seethatwaveinthesurf'
 	app.config['SESSION_TYPE'] = 'filesystem'
 	sess.init_app(app)
 	app.run()
