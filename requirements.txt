@@ -2,6 +2,7 @@
 chardet==4.0.0
 Flask
 Flask-Mail==0.9.1
+gunicorn==20.1.0
 Flask-Session==0.3.2
 Jinja2
 MarkupSafe
