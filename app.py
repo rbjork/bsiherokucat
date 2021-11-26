@@ -34,7 +34,7 @@ SHOPPING_CART = "SHOPPINGCART"
 def bsicatalog():
 	return render_template("ParcelCatalog.html")
 
-userCache = []
+userCache = {}
 
 def saveUserCounties(userIP,counties):
 	userCache[userIP] = {'date':datetime.today().day,'counties':counties}
@@ -51,7 +51,9 @@ def request4quote():
 		#counties = [json.loads(cty) for cty in counties1]
 		#session[SHOPPING_CART] = counties1
 		# OR
-		saveUserCounties(request.remote_addr, counties)
+		#pdb.set_trace()
+
+		saveUserCounties(request.remote_addr, counties1)
 	except Exception as e:
 		pass
 		#session[SHOPPING_CART] = {}
@@ -84,8 +86,8 @@ def quoteform():
 		bsicode.append(letters[random.randrange(25)])
 	bsicodestr = ''.join(bsicode)
 	#session['bsicode'] = bsicodestr
-	return render_template("requestforquote.html");
-	
+	#return render_template("requestforquote.html");
+	#pdb.set_trace()
 	try:
 		counties = getUserCounties(request.remote_addr) #session[SHOPPING_CART]
 		numinstock, pricestock, numnotinstock, pricens, numtotal, totalprice = Pricing().computeprice(counties)
@@ -106,6 +108,7 @@ def sendquoterequestfm():
                   recipients=["dklein@boundarysolutions.com"])
 	mail.send(msg)
 	return render_template("requestsent.html")
+
 
 # Replace Django request.POST[*] with request.form.get(*)
 @app.route('/sendquoterequest', methods=['POST'])
