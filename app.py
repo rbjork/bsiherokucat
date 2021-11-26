@@ -7,11 +7,12 @@ import random
 import pdb
 import json
 import random
+from datetime import datetime
 
 app = Flask(__name__)
 
 
-sess = Session()
+#sess = Session()
 st = [c for c in "abcdefghijklmnopqrstuvwxyz"]
 random.shuffle(st)
 
@@ -33,6 +34,13 @@ SHOPPING_CART = "SHOPPINGCART"
 def bsicatalog():
 	return render_template("ParcelCatalog.html")
 
+userCache = []
+
+def saveUserCounties(userIP,counties):
+	userCache[userIP] = {'date':datetime.today().day,'counties':counties}
+
+def getUserCounties(userIP,counties):
+	return userCache[userIP]
 
 # Gets around issue of Session probs.  But this does not give quote numbers
 @app.route('/requestforquote', methods=['POST','GET'])
@@ -41,7 +49,9 @@ def request4quote():
 	try:
 		counties1 = json.loads(request.form.getlist('counties')[0])
 		#counties = [json.loads(cty) for cty in counties1]
-		session[SHOPPING_CART] = counties1
+		#session[SHOPPING_CART] = counties1
+		# OR
+		saveUserCounties(request.remote_addr, counties)
 	except Exception as e:
 		pass
 		#session[SHOPPING_CART] = {}
@@ -75,7 +85,7 @@ def quoteform():
 	bsicodestr = ''.join(bsicode)
 	session['bsicode'] = bsicodestr
 	try:
-		counties = session[SHOPPING_CART]
+		counties = getUserCounties(request.remote_addr) #session[SHOPPING_CART]
 		numinstock, pricestock, numnotinstock, pricens, numtotal, totalprice = Pricing().computeprice(counties)
 	except Exception as e:
 		counties = None
