@@ -39,8 +39,8 @@ userCache = []
 def saveUserCounties(userIP,counties):
 	userCache[userIP] = {'date':datetime.today().day,'counties':counties}
 
-def getUserCounties(userIP,counties):
-	return userCache[userIP]
+def getUserCounties(userIP):
+	return userCache[userIP]['counties']
 
 # Gets around issue of Session probs.  But this does not give quote numbers
 @app.route('/requestforquote', methods=['POST','GET'])
