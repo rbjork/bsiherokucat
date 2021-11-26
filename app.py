@@ -83,7 +83,7 @@ def quoteform():
 	for i in range(5):
 		bsicode.append(letters[random.randrange(25)])
 	bsicodestr = ''.join(bsicode)
-	session['bsicode'] = bsicodestr
+	#session['bsicode'] = bsicodestr
 	try:
 		counties = getUserCounties(request.remote_addr) #session[SHOPPING_CART]
 		numinstock, pricestock, numnotinstock, pricens, numtotal, totalprice = Pricing().computeprice(counties)
@@ -129,7 +129,7 @@ def sendquoterequest():
 
 
 if __name__ == "__main__":
-	app.secret_key = ''.join(st) #'seethatwaveinthesurf'
+	#app.secret_key = ''.join(st) #'seethatwaveinthesurf'
 	app.config['SESSION_TYPE'] = 'filesystem'
-	sess.init_app(app)
+	#sess.init_app(app)
 	app.run()
