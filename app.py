@@ -84,6 +84,8 @@ def quoteform():
 		bsicode.append(letters[random.randrange(25)])
 	bsicodestr = ''.join(bsicode)
 	#session['bsicode'] = bsicodestr
+	return render_template("requestforquote.html");
+	
 	try:
 		counties = getUserCounties(request.remote_addr) #session[SHOPPING_CART]
 		numinstock, pricestock, numnotinstock, pricens, numtotal, totalprice = Pricing().computeprice(counties)
