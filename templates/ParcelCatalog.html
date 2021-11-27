@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Parcel Catalog v2</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -27,6 +28,11 @@
 	  });
 	</script>
 	<style type="text/css">
+
+    .grad {
+      background: rgb(61,31,221);
+      background: linear-gradient(90deg, rgba(61,31,221,1) 0%, rgba(3,3,128,0.8645833333333334) 75%, rgba(4,47,115,1) 100%);
+    }
 
     .ShoppingCart{
 	     background:#ffffff;
@@ -47723,6 +47729,7 @@ complete:
 		var directOrderMax = 5;
 		//var BASE_URL = "http://159.203.94.166/";
 		var BASE_URL = "https://bsicatalo.herokuapp.com/";
+    //var BASE_URL = "http://127.0.0.1:5000/"
     //var BASE_URL = "http://django-env.ry5znseyax.us-west-1.elasticbeanstalk.com/";
 		var picks = [];
 		var pickstable = [];
@@ -47778,8 +47785,9 @@ complete:
 
 		$('#requestquote').click(function(){
 			var jpicks = JSON.stringify(picks);
-			$.post("requestforquote",{csrfmiddlewaretoken: '',counties:jpicks}).done(function(){
-				window.location = BASE_URL + "quoteform"
+			//$.post("requestforquote",{csrfmiddlewaretoken: '',counties:jpicks}).done(function(){
+      $.post("requestforquote",{'counties':jpicks}).done(function(){
+				window.location = BASE_URL + "quoteform";
 			});
 		});
 
