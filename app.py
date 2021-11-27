@@ -30,14 +30,22 @@ SHOPPING_CART = "SHOPPINGCART"
 # 	MAIL_PASSWORD = 'yourpassword'
 # 	)
 
+
+
 @app.route('/')
 def bsicatalog():
 	return render_template("ParcelCatalog.html")
 
 userCache = {}
 
+
 def saveUserCounties(userIP,counties):
+	today = datetime.today().day
 	userCache[userIP] = {'date':datetime.today().day,'counties':counties}
+	#pdb.set_trace()
+	for d in userCache:
+		if abs(userCache[d]['date'] - today) > 1:
+			del userCache[d]
 
 def getUserCounties(userIP):
 	return userCache[userIP]['counties']
@@ -123,6 +131,12 @@ def sendquoterequest():
                   + " User Count:" + request.form.get('usercount') + '\n' + fips +'\n' +  deploypref + '\n' + pricetable
 		sender = request.form.get('Email')
 		print(message, sender)
+		if not os.path.exists("./requests"):
+			os.mkdir("requests")
+		with open("./requests/request_{}.txt".format(sender.replace("@","_")),'w') as fw:
+			fw.write(message)
+			fw.close()
+
 	except Exception as e:
 		print(str(e))
 		return HttpResponse('Invalid Request Quote Form data.')
