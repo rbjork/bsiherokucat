@@ -6,6 +6,7 @@ from Pricing import Pricing
 import random
 import pdb
 import json
+import os
 import random
 from datetime import datetime
 
@@ -145,6 +146,21 @@ def sendquoterequest():
 	#sendEmailByAPIGateway(sender,subject,message)
 	return render_template("requestsent.html")
 
+
+@app.route('/requests')
+def getCustomers():
+	reqfiles = os.listdir("./requests")
+	return render_template("requests.html", reqfiles=reqfiles)
+
+
+@app.route('/getcustomer',methods=['POST'])
+def getcustomer():
+	data = request.data
+	file = data['customerfile']
+	with open('./requests/{}'.format(file),'r') as fr:
+		data = fr.read()
+		fr.close()
+	return render_templalte("customerrequest.html",customer=data)
 
 
 if __name__ == "__main__":
