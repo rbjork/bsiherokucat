@@ -1,0 +1,7 @@
+<div>
+  <form action="request">
+{% for d in reqfiles %}
+  <input type="radio" name="customers" value="{{d}}">{{d}}</input><br>
+{% endfor %}
+  </form>
+</div>
