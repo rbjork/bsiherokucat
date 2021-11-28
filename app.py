@@ -54,14 +54,8 @@ def getUserCounties(userIP):
 # Gets around issue of Session probs.  But this does not give quote numbers
 @app.route('/requestforquote', methods=['POST','GET'])
 def request4quote():
-
 	try:
 		counties1 = json.loads(request.form.getlist('counties')[0])
-		#counties = [json.loads(cty) for cty in counties1]
-		#session[SHOPPING_CART] = counties1
-		# OR
-		#pdb.set_trace()
-
 		saveUserCounties(request.remote_addr, counties1)
 	except Exception as e:
 		pass
@@ -72,7 +66,6 @@ def request4quote():
 # This is the version that should be used to get quote numbers - it uses session object.
 @app.route('/requestforquote2', methods=['POST','GET'])
 def request4quote2():
-
 	try:
 		letters = 'ABCDEFGHIJKLMNOPQRTSUVWXYZ'
 		bsicode = []
@@ -94,10 +87,8 @@ def quoteform():
 	for i in range(5):
 		bsicode.append(letters[random.randrange(25)])
 	bsicodestr = ''.join(bsicode)
-	#session['bsicode'] = bsicodestr
-	#return render_template("requestforquote.html");
-	#pdb.set_trace()
 	try:
+		#pdb.set_trace()
 		counties = getUserCounties(request.remote_addr) #session[SHOPPING_CART]
 		numinstock, pricestock, numnotinstock, pricens, numtotal, totalprice = Pricing().computeprice(counties)
 	except Exception as e:
@@ -149,22 +140,33 @@ def sendquoterequest():
 
 @app.route('/requests')
 def getCustomers():
-	reqfiles = os.listdir("./requests")
+	search_dir = "./requests"
+	files = os.listdir(search_dir)
+	reqfiles = [os.path.join(search_dir, f) for f in files]
+	 # add path to each file
+	reqfiles.sort(key=lambda x: os.path.getmtime(x))
+	reqfiles.reverse()
 	return render_template("requests.html", reqfiles=reqfiles)
+
+
+@app.route('/clearrequest')
+def clearrequests():
+	search_dir = "./requests"
+	files = os.listdir(search_dir)
+	reqfiles = [os.path.join(search_dir, f) for f in files]
+	for f in reqfiles:
+		os.remove(f)
+	return jsonify({'success':True})
 
 
 @app.route('/getcustomer',methods=['POST'])
 def getcustomer():
-	data = request.data
-	file = data['customerfile']
-	with open('./requests/{}'.format(file),'r') as fr:
+	file = request.form.get('customers')
+	with open('{}'.format(file),'r') as fr:
 		data = fr.read()
 		fr.close()
-	return render_templalte("customerrequest.html",customer=data)
-
+	return render_template("customerrequest.html",customer=data)
 
 if __name__ == "__main__":
-	#app.secret_key = ''.join(st) #'seethatwaveinthesurf'
 	app.config['SESSION_TYPE'] = 'filesystem'
-	#sess.init_app(app)
 	app.run()
