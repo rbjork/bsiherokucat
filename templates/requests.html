@@ -1,7 +1,8 @@
 <div>
-  <form action="request">
+  <form action="getcustomer" method='POST'>
 {% for d in reqfiles %}
   <input type="radio" name="customers" value="{{d}}">{{d}}</input><br>
-{% endfor %}
+{% endfor %}<br>
+  <input type="submit" />
   </form>
 </div>
