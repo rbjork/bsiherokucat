@@ -1,0 +1,8 @@
+<div>
+  <form action="getcustomer" method='POST'>
+{% for d in reqfiles %}
+  <input type="radio" name="customers" value="{{d}}">{{d}}</input><br>
+{% endfor %}<br>
+  <input type="submit" value="Show Detail of Selected" />
+  </form>
+</div>
