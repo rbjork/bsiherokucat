@@ -8,12 +8,13 @@ import pdb
 import json
 import os
 import random
+import json
 from datetime import datetime
 
 app = Flask(__name__)
 
 
-#sess = Session()
+sess = Session()
 st = [c for c in "abcdefghijklmnopqrstuvwxyz"]
 random.shuffle(st)
 
@@ -33,7 +34,7 @@ SHOPPING_CART = "SHOPPINGCART"
 
 
 
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def bsicatalog():
 	return render_template("ParcelCatalog.html")
 
@@ -41,17 +42,19 @@ userCache = {}
 
 
 def saveUserCounties(userIP,counties):
-	today = datetime.today().day
-	userCache[userIP] = {'date':datetime.today().day,'counties':counties}
-	#pdb.set_trace()
-	for d in userCache:
-		if abs(userCache[d]['date'] - today) > 1:
-			del userCache[d]
+	data = {'date':datetime.today().day,'counties':counties}
+	#userCache[userIP] = data
+	with open("./requests/request_{}.txt".format(userIP),'w') as fw:
+		fw.write(json.dumps(data))
+		fw.close()
 
 def getUserCounties(userIP):
-	return userCache[userIP]['counties']
+	with open("./requests/request_{}.txt".format(userIP),'r') as fr:
+		data = json.load(fr)
+		fr.close()
+	return data['counties']
 
-# Gets around issue of Session probs.  But this does not give quote numbers
+#Gets around issue of Session probs.  But this does not give quote numbers
 @app.route('/requestforquote', methods=['POST','GET'])
 def request4quote():
 	try:
@@ -62,7 +65,6 @@ def request4quote():
 		#session[SHOPPING_CART] = {}
 	return jsonify({'count':0})
 
-
 # This is the version that should be used to get quote numbers - it uses session object.
 @app.route('/requestforquote2', methods=['POST','GET'])
 def request4quote2():
@@ -70,14 +72,17 @@ def request4quote2():
 		letters = 'ABCDEFGHIJKLMNOPQRTSUVWXYZ'
 		bsicode = []
 		for i in range(5):
-			bsicode.append(letters[random.randrange(25)])
+			bsicode.append(letters[random.randrange(25)]);
 		bsicodestr = ''.join(bsicode)
-		counties = json.loads(request.form.getlist('counties')[0])
+		#pdb.set_trace()
+		counties = json.loads(request.form.get('shoppingcartfips'));
+		#counties = json.loads(request.form.getlist('counties')[0])
 		numinstock, pricestock, numnotinstock, pricens, numtotal, totalprice = Pricing().computeprice(counties)
 	except Exception as e:
 		counties = None
 	return render_template("requestforquote.html",counties=counties, bsicode=bsicodestr, numinstock=numinstock, pricestock=pricestock,
         numnotinstock=numnotinstock, pricens=pricens, numtotal=numtotal, price=totalprice)
+
 
 
 @app.route('/quoteform')
