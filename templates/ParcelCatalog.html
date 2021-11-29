@@ -47710,7 +47710,7 @@ complete:
 </div>
 
 <div tab="tabs-2" style="font-family:calibri;width:850;margin:auto;clear:both;padding:auto;background:transparent;">
-<form class="ShoppingCart" action="/requestforquote2" id="shoppingcartform">
+<form class="ShoppingCart" action="/requestforquote2" id="shoppingcartform" method='POST'>
 
 <!--<h6 align="center" id="titleconfirm" style="visibility:hidden" ><font color="cfcf66">Boundary Solutions County Parcels Data Order Confirmation</font></h6>-->
 
@@ -47719,11 +47719,11 @@ complete:
 	<tr><th colspan="15" align="right">
     <input type="button" id='showcatalog' value='BACK TO CATALOG'>
     <input type="button" id="clearshoppingcart2" value="CLEAR FINAL SELECTION">
-    <input type="input" id="requestquote" value="4: REQUEST QUOTE"></th></tr>
-    <input type="submit" id="requestforquote2" value="5: REQUEST QUOTE"></th></tr>
+    <input type="submit" id="requestquote2" value="SUBMIT"></th></tr>
+    </tr>
 </table>
 <br>
-
+<input type='hidden' id='shoppingcartfips' name='shoppingcartfips'/>
 <table  id="orderquotetable" class="ConfirmTable" align="center" border="1" >
 <tr id="cartheading"><th>FIP</th><th>STATE</th><th colspan="1" >COUNTY </th><th>VERSION</th><th>COMP</th><th>COUNT</th><th>SIT</th><th>OWN</th><th>USE</th><th>VAL</th><th>AVAILABILITY</th></tr>
 </table>
@@ -47739,6 +47739,7 @@ complete:
 		var pickstable = [];
 
 		function populateShoppingCart(){
+      $('#shoppingcartfips').val(JSON.stringify(picks));
 			$('#orderquotetable tr').not(':first').not(':last').remove();
 			if(pickstable.length <= directOrderMax){
 				$('#buynow').show()
@@ -47858,6 +47859,7 @@ complete:
 		$('#addshoppingcart').click(function () {
 			 picks = [];
 			 pickstable = [];
+       fiplist = [];
 			 $('#addshoppingcart').val("2: UPDATE FINAL SELECTION")
 
 			 $('#mytable').find('input[type="checkbox"]:checked').each(function () {
@@ -47871,6 +47873,7 @@ complete:
 
 				pickstable.push(row);
 				//picks.push($(this).prop('id'));
+        fiplist.push(row[0]);
 				picks.push({fip:row[0], state: row[1], county:row[2],availability:row[10]})
 			 });
 
@@ -47885,7 +47888,7 @@ complete:
 						populateShoppingCart();
 					}
 				}); */
-				populateShoppingCart();
+				populateShoppingCart(fiplist);
 			 }
 			 return false;
 		});
