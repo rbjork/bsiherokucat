@@ -45,7 +45,7 @@ def populate():
 	return
 
 @app.route('/bsiquantarium', methods=['GET','POST'])
-def bsicatalog():
+def bsiquantarium():
 	return render_template("bsiquantarium.html")
 
 
