@@ -44,6 +44,10 @@ def populate():
 		fw.close()
 	return
 
+@app.route('/bsiquantarium', methods=['GET','POST'])
+def bsicatalog():
+	return render_template("bsiquantarium.html")
+
 
 @app.route('/', methods=['GET','POST'])
 def bsicatalog():
