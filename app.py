@@ -10,7 +10,7 @@ import os
 import random
 import json
 from datetime import datetime
-
+import psycopg2
 app = Flask(__name__)
 
 
@@ -32,6 +32,17 @@ SHOPPING_CART = "SHOPPINGCART"
 # 	MAIL_PASSWORD = 'yourpassword'
 # 	)
 
+metadatafile = ""
+
+@app.route('/populate')
+def populate():
+	countiesDF = pd.read_csv(metadatafile)
+	states = list({c['state'] for c in counties})
+	reshtml = render_template("ordergeneratorgrouped.html",counties = countiesDF, states = states)
+	with open('./templates/parcelcat','w') as fw:
+		fw.write(reshtml)
+		fw.close()
+	return
 
 
 @app.route('/', methods=['GET','POST'])
@@ -39,7 +50,6 @@ def bsicatalog():
 	return render_template("ParcelCatalog.html")
 
 userCache = {}
-
 
 def saveUserCounties(userIP,counties):
 	data = {'date':datetime.today().day,'counties':counties}
@@ -74,7 +84,6 @@ def request4quote2():
 		for i in range(5):
 			bsicode.append(letters[random.randrange(25)]);
 		bsicodestr = ''.join(bsicode)
-		#pdb.set_trace()
 		counties = json.loads(request.form.get('shoppingcartfips'));
 		#counties = json.loads(request.form.getlist('counties')[0])
 		numinstock, pricestock, numnotinstock, pricens, numtotal, totalprice = Pricing().computeprice(counties)
@@ -82,7 +91,6 @@ def request4quote2():
 		counties = None
 	return render_template("requestforquote.html",counties=counties, bsicode=bsicodestr, numinstock=numinstock, pricestock=pricestock,
         numnotinstock=numnotinstock, pricens=pricens, numtotal=numtotal, price=totalprice)
-
 
 
 @app.route('/quoteform')
@@ -146,21 +154,34 @@ def sendquoterequest():
 @app.route('/requests')
 def getCustomers():
 	search_dir = "./requests"
-	files = os.listdir(search_dir)
-	reqfiles = [os.path.join(search_dir, f) for f in files]
-	 # add path to each file
-	reqfiles.sort(key=lambda x: os.path.getmtime(x))
-	reqfiles.reverse()
+	if os.path.exists(search_dir):
+		files = os.listdir(search_dir)
+		reqfiles = [os.path.join(search_dir, f) for f in files]
+		 # add path to each file
+		reqfiles.sort(key=lambda x: os.path.getmtime(x))
+		reqfiles.reverse()
+	else:
+		os.mkdir(search_dir)
+		reqfiles = []
 	return render_template("requests.html", reqfiles=reqfiles)
 
 
-@app.route('/clearrequest')
+@app.route('/clearrequests')
 def clearrequests():
 	search_dir = "./requests"
 	files = os.listdir(search_dir)
 	reqfiles = [os.path.join(search_dir, f) for f in files]
 	for f in reqfiles:
 		os.remove(f)
+	return jsonify({'success':True})
+
+
+@app.route('/deletecustomerrequest', methods=['POST'])
+def deletecustomerrequest():
+	data = request.data;
+	filepath = data.decode('ascii')[1:-1]
+	if os.path.exists(filepath):
+		os.remove(filepath.strip())
 	return jsonify({'success':True})
 
 
