@@ -10,7 +10,7 @@ import os
 import random
 import json
 from datetime import datetime
-import psycopg2
+#import psycopg2
 app = Flask(__name__)
 
 
@@ -43,6 +43,7 @@ def populate():
 		fw.write(reshtml)
 		fw.close()
 	return
+
 
 @app.route('/bsiquantarium', methods=['GET','POST'])
 def bsiquantarium():
