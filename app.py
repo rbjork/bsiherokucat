@@ -47,7 +47,7 @@ def populate():
 
 @app.route('/bsiquantarium', methods=['GET','POST'])
 def bsiquantarium():
-	return render_template("BSIQuantarium.html")
+	return render_template("BSIQ.html")
 
 
 @app.route('/', methods=['GET','POST'])
