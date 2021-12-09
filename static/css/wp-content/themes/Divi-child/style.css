@@ -1,0 +1,337 @@
+/*
+ Theme Name:     Divi Child
+ Theme URI:      https://www.elegantthemes.com/gallery/divi/
+ Description:    Divi Child Theme
+ Author:         Elegant Themes
+ Author URI:     https://www.elegantthemes.com
+ Template:       Divi
+ Version:        1.0.0
+*/
+ 
+ 
+/* =Theme customization starts here
+------------------------------------------------------- */
+
+/* Menu - Active Item - Left border blue color */
+#top-menu li li:hover, #top-menu li li.current-menu-item {
+    border-color: #3dbbdb;
+	color: #3dbbdb;
+}
+
+#top-menu li li {
+    border-left: 3px solid transparent;
+	border-left-color: transparent;
+}
+
+/* ------------------------------------------------------- */
+
+/* LEADERSHIP SOCIAL MEDIA BOTTOM ALIGN AND CUSTOMIZATION */
+
+.col-bottom-align {
+	position: absolute;
+	bottom: -30px;
+}
+
+.et_pb_social_media_follow li a.icon::before {
+    background-color: #007cba !important;
+}
+
+.et_pb_social_media_follow li a.icon:hover::before {
+    background-color: #3dbbdb !important;
+}
+/* ------------------------------------------------------- */
+
+/* COUNTERS WITH PLUS SIGN */
+/* .qcounter-plus-sign span {
+	white-space: nowrap;	
+} */
+
+.qcounter-plus-sign span.percent-value:after {
+    content: "+";
+	word-break: keep-all;
+}
+/* ------------------------------------------------------- */
+
+/* BACK TO TOP ButtonFace */
+/* Default button appearance */
+.et_pb_scroll_top.et-pb-icon {
+    right: 30px; /* space from right */
+    bottom: 30px; /* space from bottom */
+    padding: 8px; /*padding size*/
+    border-radius: 30px; /* make the circle */
+    background: rgb(61, 187, 219) /* button color */; 
+    font-size: 32px; /* icon size */
+    transition: all .1s ease-in-out; /* add transition */
+	box-shadow: 0 5px 10px #162c4e4a; /*box shadow */
+}
+/* Button Appearance on Mouseover */
+.et_pb_scroll_top.et-pb-icon:hover {
+    bottom: 32px /* space from bottom */;
+    background: rgb(61, 187, 219) /*button hover color*/; 
+    transition: all .1s ease-in-out; /*add transition*/
+    box-shadow: 0 10px 15px #162c4e4a; /*box shadow on hover*/
+}
+/* Animation tweaks */
+.et_pb_scroll_top.et-visible {
+    -webkit-animation: fadeInBottom 1s 1 cubic-bezier(.50,0,.160,1);
+    -moz-animation: fadeInBottom 2s 1 cubic-bezier(.50,0,.160,1);
+    -o-animation: fadeInBottom 1s 1 cubic-bezier(.50,0,.160,1);
+    animation: fadeInBottom 1s 1 cubic-bezier(.50,0,.160,1);
+}
+.et_pb_scroll_top.et-hidden {
+    opacity: 0;
+    -webkit-animation: fadeOutBottom 1s 1 cubic-bezier(.77,0,.175,1);
+    -moz-animation: fadeOutBottom 1s 1 cubic-bezier(.77,0,.175,1);
+    -o-animation: fadeOutBottom 1s 1 cubic-bezier(.77,0,.175,1);
+    animation: fadeOutBottom 1s 1 cubic-bezier(.77,0,.175,1);
+}
+/* ------------------------------------------------------- */
+
+/* MENU CTA BUTTON */
+.menu_cta {
+	background-color: #3dbbdb;
+	padding: 0 !important;
+	border-radius: 15px !important;
+    transition: all .1s ease-in-out; /* add transition */
+	box-shadow: 0 5px 10px #162c4e4a; /*box shadow */	
+}
+
+.menu_cta:hover {
+	background-color: #3dbbdb;
+	padding: 0 !important;
+	border-radius: 15px !important;
+    transition: all .1s ease-in-out; /*add transition*/
+    box-shadow: 0 10px 15px #162c4e4a; /*box shadow on hover*/
+}
+
+.menu_cta a {
+	padding: 10px !important;
+	color: #ffffff !important;	
+	border-radius: 15px !important;
+}
+
+.menu_cta a:before {
+	content: '\e06c\00a0';
+	color: #ffffff !important;
+	font-family: 'ETmodules';
+	font-size: 12px;
+}
+
+ #top-menu .menu_cta:hover a { 
+	 opacity: 0.5; 
+	 background-color: #274554; 
+	 color: #fff !important; 
+ } 
+
+ .menu_cta:hover a:before { 
+	 opacity: 1; 
+	 content: '\e06c\00a0'; 
+	 color: #fff; 
+	 font-family: 'ETmodules'; 
+	 font-size: 12px; 
+ } 
+
+/* ------------------------------------------------------- */
+
+/* FOOTER INFO - Bottom Bar */
+#footer-info, #footer-address {
+	color: #b7b7b7;
+	text-align: center;
+}
+
+#footer-info a, #footer-address a {
+	color: #b7b7b7; 
+}
+
+#footer-info a:hover, #footer-address a:hover {
+	color: #3dbbdb;
+	opacity: 1;
+}
+
+#footer-info a:after {
+	color: #b7b7b7;	
+    content: " |";
+}
+
+#footer-info #last-footer-item a:after {
+	color: #b7b7b7;	
+    content: "";
+}
+
+/* ------------------------------------------------------- */
+
+/* HOME PAGE BUTTONS BOTTOM ALIGN  */
+
+.buttons-bottom-align {
+	position: absolute;
+	bottom: -30px;
+}
+
+/* ------------------------------------------------------- */
+
+/* REMOVE SIDEBAR */
+
+/*** Take out the divider line between content and sidebar 
+#main-content .container:before {
+    background: none;
+}
+***/
+
+/*** Hide Sidebar 
+#sidebar {
+    display:none;
+}
+***/ 
+
+/*** Expand the content area to fullwidth 
+@media (min-width: 981px){
+    #left-area {
+        width: 100%;
+        padding: 23px 0px 0px !important;
+        float: none !important;
+    }
+}
+***/
+
+/* ------------------------------------------------------- */
+
+/* Avoid double navigation arrow for Divi carousel. Conflict with DiviEssential 
+    - solved in last Divi Carousel 
+*/
+
+/* .swiper-button-prev[aria-label="Previous slide"]::after,
+.swiper-button-next[aria-label="Next slide"]:after {
+	content: ""!important;
+} */
+/* ------------------------------------------------------- */
+
+/* Datasheets Pop-ups */
+
+/* Close Buttons */
+a#close-btn0, a#close-btn1, a#close-btn2, a#close-btn3,
+a#close-btn4, a#close-btn5, a#close-btn6 {
+  position:absolute;
+  z-index: 99999;
+  top: -30px;
+  right: -30px;
+  cursor:pointer;
+}
+
+@media all and (max-width: 767px) {
+  a#close-btn0, a#close-btn1, a#close-btn2, a#close-btn3, 
+  a#close-btn4, a#close-btn5, a#close-btn6 {
+    top: -13px;
+    right: -13px;
+  }
+}
+
+a#close-btn0 img, a#close-btn1 img, a#close-btn2 img, a#close-btn3 img, 
+a#close-btn4 img, a#close-btn5 img, a#close-btn6 img {
+  width: 30px;
+  height: auto;
+}
+
+
+/* Hide Divi sections until button is triggered */
+.modal-wrapper0, .modal-wrapper1, .modal-wrapper2, .modal-wrapper3,
+.modal-wrapper4, .modal-wrapper5, .modal-wrapper6 {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display:none;
+  overflow:auto;
+}
+
+.modal-datasheet {
+  position: fixed;
+  z-index: 99999;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  min-width: 320px;
+}
+
+/* ------------------------------------------------------- */
+/* Customizing right sidebar - Latest posts */
+
+#sidebar .et_pb_widget {
+    margin-bottom: 10px;
+}
+
+#sidebar div:first-of-type {
+	margin-bottom: 20px;
+}
+
+#sidebar h4:first-of-type {
+	color: #212121;
+	font-size: 18px;
+	padding-bottom:18px;
+}
+
+#sidebar a {
+	color: #333333 !important;
+	font-size: 14px;
+}
+
+#sidebar a:hover {
+	color: #3dbbdb !important;
+}
+
+#sidebar span.post-date {
+	color: #777777 !important;
+	display: block;
+	font-size: 11px;
+	padding-bottom: 10px;	
+}
+
+#sidebar .et_pb_widget:last-of-type h4 {
+	color: #777777 !important;
+	font-size: 14px;
+}
+
+.separatorLine {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 46px;
+    border: 3px solid #3dbbdb;
+    border-style: none none solid;
+    color: #3dbbdb;
+    background-color: #3dbbdb;
+	margin-bottom: 35px;
+	margin-top: 20px;
+}
+/* ------------------------------------------------------- */
+/* Customizing WordPress Image caption 
+    - no border
+    - no background color (white color in fact)
+    - no caption text
+*/
+
+.wp-caption {
+    border: none;
+    background: none;
+}
+
+.wp-caption img {
+    margin: 0px;
+}
+
+.entry-content .wp-caption p.wp-caption-text {
+    display: none;
+}
+
+
+/* ------------------------------------------------------- */
+/* Social Icon Footer
+*/
+
+.footer_social_icon {
+	width: 75px;
+	vertical-align: text-bottom;
+	padding-left: 2px;
+}
+
+/* ------------------------------------------------------- */
