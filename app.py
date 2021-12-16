@@ -3,6 +3,12 @@ from flask_session import Session
 
 #from awsemail import sendEmailByAPIGateway, sendUserInfo, get_client_ip
 #from mail2go import *
+
+import email.utils
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib
+
 from Pricing import Pricing
 import random
 import pdb
