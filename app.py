@@ -8,6 +8,7 @@ import email.utils
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
+from os import environ
 
 from Pricing import Pricing
 import random
@@ -24,6 +25,9 @@ sess = Session()
 st = [c for c in "abcdefghijklmnopqrstuvwxyz"]
 random.shuffle(st)
 
+userCache = {}
+SMTP_ADDRESS = "mail.boundarysolutions.com"
+PASSWORD = "XIDIqMpZ3"
 SHOPPING_CART = "SHOPPINGCART"
 
 # from flask_mail import Mail
@@ -59,7 +63,7 @@ def bsiquantarium():
 def bsicatalog():
 	return render_template("ParcelCatalog.html")
 
-userCache = {}
+
 
 def saveUserCounties(userIP,counties):
 	data = {'date':datetime.today().day,'counties':counties}
@@ -84,6 +88,7 @@ def request4quote():
 		pass
 		#session[SHOPPING_CART] = {}
 	return jsonify({'count':0})
+
 
 # This is the version that should be used to get quote numbers - it uses session object.
 @app.route('/requestforquote2', methods=['POST','GET'])
@@ -187,7 +192,6 @@ def clearrequests():
 		os.remove(f)
 	return jsonify({'success':True})
 
-
 @app.route('/deletecustomerrequest', methods=['POST'])
 def deletecustomerrequest():
 	data = request.data;
@@ -203,72 +207,69 @@ def getcustomer():
 	with open('{}'.format(file),'r') as fr:
 		data = fr.read()
 		fr.close()
-	return render_template("customerrequest.html",customer=data)
+	return render_template("customerrequest.html", customer=data)
 
 
-SMTP_ADDRESS = "mail.boundarysolutions.com"
-PASSWORD = "XIDIqMpZ3"
+# def sendEmail(customername, customeremail, text):
+# 	msg = MIMEMultipart('alternative')
+# 	msg['Subject'] = 'Quote Request'
+# 	msg['From'] = customeremail
+# 	msg['To'] = 'quotepage@boundarysolutions.com'
+# 	textmsg = MIMEText(text,'plain')
+# 	msg.attach(textmsg)
+# 	smtp = smtplib.SMTP(SMTP_ADDRESS)
+# 	smtp.login("quotepage",PASSWORD)
+# 	smtp.sendmail(SMTP_ADDRESS, customeremail, msg.as_string())
+# 	smtp.quit()
+
 
 def sendEmail(customername, customeremail, text):
-    msg = MIMEMultipart('alternative')
-    msg['Subject'] = 'Quote Request'
-    msg['From'] = customeremail
-    msg['To'] = 'quotepage@boundarysolutions.com'
-    textmsg = MIMEText(text,'plain')
-    msg.attach(textmsg)
-    smtp = smtplit.SMTP(SMTP_ADDRESS)
-	smtp.login("quotepage",PASSWORD)
-    smtp.sendmail(SMTP_ADDRESS,useremail,msg.as_string())
-    smtp.quit()
-
-
-def sendEmail2(customername, customeremail, text):
-    # sender
-    #sender_user = useremail
+	mailertogo_port     = environ.get('MAILERTOGO_SMTP_PORT', 587)
 	mailertogo_host     = environ.get('MAILERTOGO_SMTP_HOST')
-    mailertogo_port     = environ.get('MAILERTOGO_SMTP_PORT', 587)
-    mailertogo_user     = environ.get('MAILERTOGO_SMTP_USER')
-    mailertogo_password = environ.get('MAILERTOGO_SMTP_PASSWORD')
-    mailertogo_domain   = environ.get('MAILERTOGO_DOMAIN', "boundarysolutions.com")
+	mailertogo_user     = environ.get('MAILERTOGO_SMTP_USER')
+	mailertogo_password = environ.get('MAILERTOGO_SMTP_PASSWORD')
+	mailertogo_domain   = environ.get('MAILERTOGO_DOMAIN', "boundarysolutions.com")
 
-    sender_email = customeremail
-    sender_name = customername
+	sender_email = customeremail
+	sender_name = customername
 
-    # recipient
-    recipient_email = 'quotepage@boundarysolutions.com' # change to recipient email. Make sure to use a real email address in your tests to avoid hard bounces and protect your reputation as a sender.
-    recipient_name = 'Dennis Klein'
-    # subject
-    subject = 'Request For Quote'
-    # text body
-    body_plain = (text)
-    # html body
-    line_break = '\n' #used to replace line breaks with html breaks
+	# recipient
+	recipient_email = 'quotepage@boundarysolutions.com' # change to recipient email. Make sure to use a real email address in your tests to avoid hard bounces and protect your reputation as a sender.
+	recipient_name = 'Dennis Klein'
+	# subject
+	subject = 'Request For Quote'
+	# text body
+	body_plain = (text)
+	# html body
+	line_break = '\n' #used to replace line breaks with html breaks
 
-    # create message container
-    message = MIMEMultipart('alternative')
-    message['Subject'] = subject
-    message['From'] = email.utils.formataddr((sender_name, sender_email))
-    message['To'] = email.utils.formataddr((recipient_name, recipient_email))
+	# create message container
+	message = MIMEMultipart('alternative')
+	message['Subject'] = subject
+	message['From'] = email.utils.formataddr((sender_name, sender_email))
+	message['To'] = email.utils.formataddr((recipient_name, recipient_email))
 
-    # prepare plain and html message parts
-    part1 = MIMEText(body_plain, 'plain')
-    #part2 = MIMEText(body_html, 'html')
-    # attach parts to message
-    message.attach(part1)
-    #message.attach(part2)
-    # send the message.
-    try:
-        server = smtplib.SMTP(mailertogo_host, mailertogo_port)
-        server.ehlo()
-        server.starttls()
-        server.ehlo()
-        server.login(mailertogo_user, mailertogo_password)
-        server.sendmail(sender_email, recipient_email, message.as_string())
-        server.close()
-    except Exception as e:
-        print ("Error: ", e)
-    else:
-        print ("Email sent!")
+	# prepare plain and html message parts
+	part1 = MIMEText(body_plain, 'plain')
+	#part2 = MIMEText(body_html, 'html')
+	# attach parts to message
+	message.attach(part1)
+	#message.attach(part2)
+	# send the message.
+	try:
+		server = smtplib.SMTP(mailertogo_host, mailertogo_port)
+		server.ehlo()
+		server.starttls()
+		server.ehlo()
+		server.login(mailertogo_user, mailertogo_password)
+		server.sendmail(sender_email, recipient_email, message.as_string())
+		server.close()
+	except Exception as e:
+		print ("Error: ", e)
+	else:
+		print ("Email sent!")
+
+
 
 if __name__ == "__main__":
 	app.config['SESSION_TYPE'] = 'filesystem'
