@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, session, jsonify
 from flask_session import Session
 
 #from awsemail import sendEmailByAPIGateway, sendUserInfo, get_client_ip
+from mail2go import *
 from Pricing import Pricing
 import random
 import pdb
