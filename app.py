@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, jsonify
+from flask import Flask, request, render_template, session, jsonify, Response
 from flask_session import Session
 
 #from awsemail import sendEmailByAPIGateway, sendUserInfo, get_client_ip
@@ -151,15 +151,15 @@ def sendquoterequest():
                   + " User Count:" + request.form.get('usercount') + '\n' + fips +'\n' +  deploypref + '\n' + pricetable
 		senderemail = request.form.get('Email')
 		print(message, senderemail)
-		if not os.path.exists("./requests"):
-			os.mkdir("requests")
-		with open("./requests/request_{}.txt".format(sender.replace("@","_")),'w') as fw:
-			fw.write(message)
-			fw.close()
+		# if not os.path.exists("./requests"):
+		# 	os.mkdir("requests")
+		# with open("./requests/request_{}.txt".format(sender.replace("@","_")),'w') as fw:
+		# 	fw.write(message)
+		# 	fw.close()
 
 	except Exception as e:
 		print(str(e))
-		return HttpResponse('Invalid Request Quote Form data.')
+		return Response('Invalid Request Quote Form data.',status=201, mimetype='application/text')
 
 	recipients = ['ronaldbjork@sbcglobal.net','INFO@boundarysolutions.com']
 	#sendEmailByAPIGateway(sender,subject,message)
