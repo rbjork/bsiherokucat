@@ -230,11 +230,11 @@ def sendEmail(customername, customeremail, text):
 	mailertogo_password = environ.get('MAILERTOGO_SMTP_PASSWORD')
 	mailertogo_domain   = environ.get('MAILERTOGO_DOMAIN', "boundarysolutions.com")
 
-	sender_email = customeremail
-	sender_name = customername
+	sender_email = 'quotepage@boundarysolutions.com'
+	sender_name = 'customer'
 
 	# recipient
-	recipient_email = 'quotepage@boundarysolutions.com' # change to recipient email. Make sure to use a real email address in your tests to avoid hard bounces and protect your reputation as a sender.
+	recipient_email = 'dklein@boundarysolutions.com' # change to recipient email. Make sure to use a real email address in your tests to avoid hard bounces and protect your reputation as a sender.
 	recipient_name = 'Dennis Klein'
 	# subject
 	subject = 'Request For Quote'
