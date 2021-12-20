@@ -267,8 +267,8 @@ def sendEmail(customername, customeremail, text):
 	# send the message.
 	try:
 		print("mailertogo_host",mailertogo_host)
-		server = smtplib.SMTP(mailertogo_host)
-		server.connect(mailertogo_host, mailertogo_port)  # ???
+		server = smtplib.SMTP(mailertogo_host, mailertogo_port)
+		#rtn = server.connect(mailertogo_host, mailertogo_port)
 		server.ehlo()
 		server.starttls()
 		server.ehlo()
