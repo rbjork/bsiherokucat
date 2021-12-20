@@ -40,7 +40,7 @@ SHOPPING_CART = "SHOPPINGCART"
 # 	MAIL_USE_SSL=True,
 # 	MAIL_USERNAME = 'your@gmail.com',
 # 	MAIL_PASSWORD = 'yourpassword'
-# 	)
+# )
 
 metadatafile = ""
 
@@ -192,6 +192,7 @@ def clearrequests():
 		os.remove(f)
 	return jsonify({'success':True})
 
+
 @app.route('/deletecustomerrequest', methods=['POST'])
 def deletecustomerrequest():
 	data = request.data;
@@ -224,6 +225,7 @@ def getcustomer():
 
 
 def sendEmail(customername, customeremail, text):
+
 	mailertogo_port     = environ.get('MAILERTOGO_SMTP_PORT', 587)
 	mailertogo_host     = environ.get('MAILERTOGO_SMTP_HOST')
 	mailertogo_user     = environ.get('MAILERTOGO_SMTP_USER')
@@ -257,13 +259,14 @@ def sendEmail(customername, customeremail, text):
 	#message.attach(part2)
 	# send the message.
 	try:
-		server = smtplib.SMTP(mailertogo_host, mailertogo_port)
-		server.ehlo()
+		server = smtplib.SMTP()
+		server.connect(mailertogo_host, mailertogo_port)  # ???
+		#server.ehlo()
 		server.starttls()
-		server.ehlo()
+		#server.ehlo()
 		server.login(mailertogo_user, mailertogo_password)
-		server.sendmail(sender_email, recipient_email, message.as_string())
-		server.close()
+		server.sendmail(message.get('From'), message['To'], message.as_string())
+		server.quit()
 	except Exception as e:
 		print ("Error: ", e)
 	else:
