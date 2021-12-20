@@ -238,7 +238,8 @@ def sendEmail(customername, customeremail, text):
 	print('mailertogo_password',mailertogo_password)
 	print('mailertogo_domain',mailertogo_domain)
 
-	sender_email = 'quotepage@boundarysolutions.com'
+	sender_user = "quotepage"
+	sender_email = "@".join([sender_user, mailertogo_domain])
 	sender_name = 'customer'
 
 	# recipient
