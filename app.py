@@ -267,14 +267,14 @@ def sendEmail(customername, customeremail, text):
 	# send the message.
 	try:
 		print("mailertogo_host",mailertogo_host)
-		server = smtplib.SMTP(mailertogo_host, mailertogo_port)
-		#server.connect(mailertogo_host, mailertogo_port)  # ???
-		server.ehlo()
+		server = smtplib.SMTP()
+		server.connect(mailertogo_host, mailertogo_port)  # ???
+		#server.ehlo()
 		server.starttls()
-		server.ehlo()
+		#server.ehlo()
 		server.login(mailertogo_user, mailertogo_password)
 		server.sendmail(message.get('From'), message['To'], message.as_string())
-		server.quit()
+		server.close()
 	except Exception as e:
 		print ("Error: ", e)
 	else:
