@@ -269,6 +269,11 @@ def sendEmail(customername, customeremail, text):
 		print("mailertogo_host",mailertogo_host)
 		server = smtplib.SMTP(mailertogo_host, mailertogo_port)
 		#rtn = server.connect(mailertogo_host, mailertogo_port)
+	except Exception as e:
+		print ("Error: ", e)
+	else:
+		print ("Connected!")
+	try:
 		server.ehlo()
 		server.starttls()
 		server.ehlo()
@@ -278,7 +283,7 @@ def sendEmail(customername, customeremail, text):
 	except Exception as e:
 		print ("Error: ", e)
 	else:
-		print ("Email sent!")
+		print ("Login and Email sent!")
 
 
 
