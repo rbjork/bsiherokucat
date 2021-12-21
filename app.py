@@ -243,8 +243,8 @@ def sendEmail(customername, customeremail, text):
 	sender_name = 'customer'
 
 	# recipient
-	recipient_email = 'dklein@boundarysolutions.com' # change to recipient email. Make sure to use a real email address in your tests to avoid hard bounces and protect your reputation as a sender.
-	recipient_name = 'Dennis Klein'
+	recipient_email = 'grbtxtmsg@gmail.com' # change to recipient email. Make sure to use a real email address in your tests to avoid hard bounces and protect your reputation as a sender.
+	recipient_name = 'Ron'
 	# subject
 	subject = 'Request For Quote'
 	# text body
