@@ -239,7 +239,7 @@ def sendEmail(customername, customeremail, text):
 	print('mailertogo_domain',mailertogo_domain)
 
 	sender_user = "quotepage"
-	sender_email = "@".join([sender_user, mailertogo_domain])
+	sender_email = "@".join([sender_user, "boundarysolutions.com"])
 	sender_name = 'customer'
 
 	# recipient
@@ -288,7 +288,7 @@ def sendEmail(customername, customeremail, text):
 	else:
 		print ("Login ok!")
 	try:
-		server.sendmail(message.get('From'), message['To'], message.as_string())
+		server.sendmail(sender_email, recipient_email, message.as_string())
 		server.close()
 	except Exception as e:
 		print ("Error: ", e)
