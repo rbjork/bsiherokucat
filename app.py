@@ -277,7 +277,17 @@ def sendEmail(customername, customeremail, text):
 		server.ehlo()
 		server.starttls()
 		server.ehlo()
+	except Exception as e:
+		print ("Error: ", e)
+	else:
+		print ("ehlo and startls ok!")
+	try:
 		server.login(mailertogo_user, mailertogo_password)
+	except Exception as e:
+		print ("Error: ", e)
+	else:
+		print ("Login ok!")
+	try:
 		server.sendmail(message.get('From'), message['To'], message.as_string())
 		server.close()
 	except Exception as e:
