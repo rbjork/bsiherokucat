@@ -17,7 +17,10 @@ import json
 import os
 import random
 import json
+import pandas as pd
 from datetime import datetime
+import pdb
+
 #import psycopg2
 app = Flask(__name__)
 
@@ -42,17 +45,39 @@ SHOPPING_CART = "SHOPPINGCART"
 # 	MAIL_PASSWORD = 'yourpassword'
 # )
 
-metadatafile = ""
+metadatafile = "QUOTEPAGE.xlsx"
 
 @app.route('/populate')
 def populate():
-	countiesDF = pd.read_csv(metadatafile)
-	states = list({c['state'] for c in counties})
-	reshtml = render_template("ordergeneratorgrouped.html",counties = countiesDF, states = states)
-	with open('./templates/parcelcat','w') as fw:
+	countiesDF = pd.read_excel(metadatafile)
+	rn = {col:col.strip() for col in countiesDF.columns}
+	cdfrn = countiesDF.rename(columns=rn)
+	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
+	cdf = cdfrn.set_index('ST')
+	#
+	# for state in states:
+	# 	statecounties = cdf.loc[state,:]
+	# 	if not isinstance(statecounties,pd.DataFrame):
+	# 		states.remove(state)
+	# for state in states:
+	# 	statecounties = cdf.loc[state,:]
+	# 	for i,col in statecounties.iterrows():
+	# 		print(col.COUNTY)
+	#
+	# pdb.set_trace()
+	reshtml = render_template("ordergeneratorgrouped.html",counties = cdf, states = states)
+
+	# for state, statecounties in cdf.groupby(level=0):
+	# 	for i,row in statecounties.iterrows():
+	# 		for i,itm in row.iteritems():
+	# 			print(itm)
+	#print(reshtml)
+	with open('./templates/parcelcat.html','w') as fw:
 		fw.write(reshtml)
 		fw.close()
-	return
+
+	return reshtml
+
 
 @app.route('/bsiquantarium', methods=['GET','POST'])
 def bsiquantarium():
@@ -62,7 +87,6 @@ def bsiquantarium():
 @app.route('/', methods=['GET','POST'])
 def bsicatalog():
 	return render_template("ParcelCatalog.html")
-
 
 
 def saveUserCounties(userIP,counties):
@@ -243,8 +267,8 @@ def sendEmail(customername, customeremail, text):
 	sender_name = 'customer'
 
 	# recipient
-	recipient_email = 'grbtxtmsg@gmail.com' # change to recipient email. Make sure to use a real email address in your tests to avoid hard bounces and protect your reputation as a sender.
-	recipient_name = 'Ron'
+	recipient_email = 'dklein@boundarysolutions.com' # change to recipient email. Make sure to use a real email address in your tests to avoid hard bounces and protect your reputation as a sender.
+	recipient_name = 'Dennis'
 	# subject
 	subject = 'Request For Quote'
 	# text body
