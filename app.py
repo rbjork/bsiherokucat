@@ -17,9 +17,9 @@ import json
 import os
 import random
 import json
-import pandas as pd
+#import pandas as pd
 from datetime import datetime
-import pdb
+
 
 #import psycopg2
 app = Flask(__name__)
@@ -45,38 +45,21 @@ SHOPPING_CART = "SHOPPINGCART"
 # 	MAIL_PASSWORD = 'yourpassword'
 # )
 
-metadatafile = "QUOTEPAGE.xlsx"
-
-@app.route('/populate')
-def populate():
-	countiesDF = pd.read_excel(metadatafile)
-	rn = {col:col.strip() for col in countiesDF.columns}
-	cdfrn = countiesDF.rename(columns=rn)
-	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
-	cdf = cdfrn.set_index('ST')
-	#
-	# for state in states:
-	# 	statecounties = cdf.loc[state,:]
-	# 	if not isinstance(statecounties,pd.DataFrame):
-	# 		states.remove(state)
-	# for state in states:
-	# 	statecounties = cdf.loc[state,:]
-	# 	for i,col in statecounties.iterrows():
-	# 		print(col.COUNTY)
-	#
-	# pdb.set_trace()
-	reshtml = render_template("ordergeneratorgrouped.html",counties = cdf, states = states)
-
-	# for state, statecounties in cdf.groupby(level=0):
-	# 	for i,row in statecounties.iterrows():
-	# 		for i,itm in row.iteritems():
-	# 			print(itm)
-	#print(reshtml)
-	with open('./templates/parcelcat.html','w') as fw:
-		fw.write(reshtml)
-		fw.close()
-
-	return reshtml
+# metadatafile = "QUOTEPAGE.xlsx"
+#
+# @app.route('/populate')
+# def populate():
+# 	countiesDF = pd.read_excel(metadatafile)
+# 	rn = {col:col.strip() for col in countiesDF.columns}
+# 	cdfrn = countiesDF.rename(columns=rn)
+# 	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
+# 	cdf = cdfrn.set_index('ST')
+# 	reshtml = render_template("ordergeneratorgrouped.html",counties = cdf, states = states)
+# 	with open('./templates/parcelcat.html','w') as fw:
+# 		fw.write(reshtml)
+# 		fw.close()
+#
+# 	return reshtml
 
 
 @app.route('/bsiquantarium', methods=['GET','POST'])
