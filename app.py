@@ -237,7 +237,7 @@ def sendEmail(customername, customeremail, text):
 	mailertogo_host     = environ.get('MAILERTOGO_SMTP_HOST')
 	mailertogo_user     = environ.get('MAILERTOGO_SMTP_USER')
 	mailertogo_password = environ.get('MAILERTOGO_SMTP_PASSWORD')
-	mailertogo_domain   = environ.get('MAILERTOGO_DOMAIN', "boundarysolutions.com")
+	mailertogo_domain   = environ.get('MAILERTOGO_DOMAIN', "bsiquotepage.com")
 
 	print('mailertogo_host',mailertogo_host)
 	print('mailertogo_port',mailertogo_port)
