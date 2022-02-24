@@ -81,11 +81,13 @@ def bsicatalog():
 
 
 def saveUserCounties(userIP,counties):
+	print("saveUserCounties")
 	data = {'date':datetime.today().day,'counties':counties}
-	print("WRITES TO LOG ",userID)
+	print("WRITES TO LOG ","./requests/request_{}.txt".format(userIP))
 	with open("./requests/request_{}.txt".format(userIP),'w') as fw:
 		fw.write(json.dumps(data))
 		fw.close()
+		print("Write succeeded")
 
 def getUserCounties(userIP):
 	print("FILE EXISTS",os.path.exists("./requests/request_{}.txt".format(userIP)))
