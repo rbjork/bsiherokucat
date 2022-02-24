@@ -82,11 +82,13 @@ def bsicatalog():
 
 def saveUserCounties(userIP,counties):
 	data = {'date':datetime.today().day,'counties':counties}
+	print("WRITES TO LOG ",userID)
 	with open("./requests/request_{}.txt".format(userIP),'w') as fw:
 		fw.write(json.dumps(data))
 		fw.close()
 
 def getUserCounties(userIP):
+	print("FILE EXISTS",os.path.exists("./requests/request_{}.txt".format(userIP)))
 	with open("./requests/request_{}.txt".format(userIP),'r') as fr:
 		data = json.load(fr)
 		fr.close()
@@ -131,7 +133,9 @@ def quoteform():
 	bsicodestr = ''.join(bsicode)
 	try:
 		#pdb.set_trace()
+		print("Calling getUserCounties")
 		counties = getUserCounties(request.remote_addr) #session[SHOPPING_CART]
+		print("Number of counties",len(counties))
 		numinstock, pricestock, numnotinstock, pricens, numtotal, totalprice = Pricing().computeprice(counties)
 	except Exception as e:
 		counties = None
