@@ -45,29 +45,29 @@ SHOPPING_CART = "SHOPPINGCART"
 # 	MAIL_PASSWORD = 'yourpassword'
 # )
 
-import pandas as pd
-
-metadatafile = "QUOTEPAGE.xlsx"
-
-@app.route('/populate')
-def populate():
-	countiesDF = pd.read_excel(metadatafile)
-	rn = {col:col.replace('%','').strip() for col in countiesDF.columns}
-	cdfrn = countiesDF.rename(columns=rn)
-	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
-	cdf = cdfrn.set_index('ST')
-	cdfn = cdf.copy()
-	cdfn.loc[:,cdf.columns[3:-1]] = cdf.loc[:,cdf.columns[3:-1]].apply(lambda x:(100*x[0:]/x[0]).round(0),axis=1)
-	cdfn.loc[:,'PARC_COUNT'] = cdf.loc[:,'PARC_COUNT']
-	cdfn = cdfn.fillna('')
-	#pdb.set_trace()
-	cdfn.loc[:,"VERSIONDATE"] = cdfn.loc[:,"VERSIONDATE"].apply(lambda x: str(x)[0:10])
-	#pdb.set_trace()
-	reshtml = render_template("ordergeneratorgrouped.html",counties = cdfn, states = states)
-	with open('./templates/parcelcat.html','w') as fw:
-		fw.write(reshtml)
-		fw.close()
-	return reshtml
+# import pandas as pd
+#
+# metadatafile = "QUOTEPAGE.xlsx"
+#
+# @app.route('/populate')
+# def populate():
+# 	countiesDF = pd.read_excel(metadatafile)
+# 	rn = {col:col.replace('%','').strip() for col in countiesDF.columns}
+# 	cdfrn = countiesDF.rename(columns=rn)
+# 	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
+# 	cdf = cdfrn.set_index('ST')
+# 	cdfn = cdf.copy()
+# 	cdfn.loc[:,cdf.columns[3:-1]] = cdf.loc[:,cdf.columns[3:-1]].apply(lambda x:(100*x[0:]/x[0]).round(0),axis=1)
+# 	cdfn.loc[:,'PARC_COUNT'] = cdf.loc[:,'PARC_COUNT']
+# 	cdfn = cdfn.fillna('')
+# 	#pdb.set_trace()
+# 	cdfn.loc[:,"VERSIONDATE"] = cdfn.loc[:,"VERSIONDATE"].apply(lambda x: str(x)[0:10])
+# 	#pdb.set_trace()
+# 	reshtml = render_template("ordergeneratorgrouped.html",counties = cdfn, states = states)
+# 	with open('./templates/parcelcat.html','w') as fw:
+# 		fw.write(reshtml)
+# 		fw.close()
+# 	return reshtml
 
 
 @app.route('/bsiquantarium', methods=['GET','POST'])
