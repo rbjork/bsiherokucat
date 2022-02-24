@@ -121,7 +121,7 @@ def request4quote2():
 	return render_template("requestforquote.html",counties=counties, bsicode=bsicodestr, numinstock=numinstock, pricestock=pricestock,
         numnotinstock=numnotinstock, pricens=pricens, numtotal=numtotal, price=totalprice)
 
-@app.route('/countyparcels/quoteform')
+
 @app.route('/quoteform')
 def quoteform():
 	letters = 'ABCDEFGHIJKLMNOPQRTSUVWXYZ'
