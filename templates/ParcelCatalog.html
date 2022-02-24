@@ -219,7 +219,7 @@
 <div id="tabs-1" style="font-family:calibri;width:850;margin:auto;clear:both;padding:auto;font-size:14px"  >
 <form>
 <center>
-<b>CATALOG</b>
+<b>CATALOG V3</b>
 <div class="Statelist" align="center">
 <b>Links To States:</b>
 
@@ -44734,7 +44734,7 @@ complete:
 		var directOrderMax = 5;
 		//var BASE_URL = "http://159.203.94.166/";
 		//var BASE_URL = "http://127.0.0.1:8000/";
-    var BASE_URL = "https://bsicatalo.herokuapp.com/";
+    var BASE_URL = "/"; //"https://bsicatalo.herokuapp.com/";
     //var BASE_URL = "http://django-env.ry5znseyax.us-west-1.elasticbeanstalk.com/";
 		var picks = [];
 		var pickstable = [];
@@ -44790,6 +44790,7 @@ complete:
 
 		$('#requestquote').click(function(){
 			var jpicks = JSON.stringify(picks);
+      debugger;
 			$.post("requestforquote",{counties:jpicks}).done(function(){
 				window.location = BASE_URL + "countyparcels/quoteform"
 			});
