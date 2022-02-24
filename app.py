@@ -83,6 +83,8 @@ def bsicatalog():
 def saveUserCounties(userIP,counties):
 	print("saveUserCounties")
 	data = {'date':datetime.today().day,'counties':counties}
+	if not os.path.exists("./requests"):
+		os.mkdir('./requests')
 	print("WRITES TO LOG ","./requests/request_{}.txt".format(userIP))
 	with open("./requests/request_{}.txt".format(userIP),'w') as fw:
 		fw.write(json.dumps(data))
