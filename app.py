@@ -98,6 +98,8 @@ def getUserCounties(userIP):
 @app.route('/requestforquote', methods=['POST','GET'])
 def request4quote():
 	try:
+		print("CALLED request4quote")
+		print("CALLING saveUserCounties")
 		counties1 = json.loads(request.form.getlist('counties')[0])
 		saveUserCounties(request.remote_addr, counties1)
 	except Exception as e:
@@ -110,6 +112,7 @@ def request4quote():
 @app.route('/requestforquote2', methods=['POST','GET'])
 def request4quote2():
 	try:
+		print("CALLED request4quote2")
 		letters = 'ABCDEFGHIJKLMNOPQRTSUVWXYZ'
 		bsicode = []
 		for i in range(5):
