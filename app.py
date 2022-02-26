@@ -77,7 +77,11 @@ def bsiquantarium():
 
 @app.route('/', methods=['GET','POST'])
 def bsicatalog():
-	return render_template("ParcelCatalog.html")
+	return render_template("parcelcatalogcontainer.html")
+
+@app.route("/getbody", methods=['GET'])
+def getbody():
+	return render_template("ParcelCatalogBody.html")
 
 
 def saveUserCounties(userIP,counties):
