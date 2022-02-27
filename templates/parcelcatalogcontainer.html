@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Parcel Catalog</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script language="javascript" >
+	/**
+	* Created by ronaldbjork on 1/13/16.
+	*/
+	/*! modernizr 3.3.0 (Custom Build) | MIT *
+	* http://modernizr.com/download/?-audio-canvas-cssanimations-setclasses !*/
+	!function(e,n,t){function o(e,n){return typeof e===n}function r(){var e,n,t,r,a,s,i;for(var l in C)if(C.hasOwnProperty(l)){if(e=[],n=C[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(r=o(n.fn,"function")?n.fn():n.fn,a=0;a<e.length;a++)s=e[a],i=s.split("."),1===i.length?Modernizr[i[0]]=r:(!Modernizr[i[0]]||Modernizr[i[0]]instanceof Boolean||(Modernizr[i[0]]=new Boolean(Modernizr[i[0]])),Modernizr[i[0]][i[1]]=r),h.push((r?"":"no-")+i.join("-"))}}function a(e){var n=_.className,t=Modernizr._config.classPrefix||"";if(x&&(n=n.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(o,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),x?_.className.baseVal=n:_.className=n)}function s(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):x?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function i(e,n){return function(){return e.apply(n,arguments)}}function l(e,n,t){var r;for(var a in e)if(e[a]in n)return t===!1?e[a]:(r=n[e[a]],o(r,"function")?i(r,t||n):r);return!1}function u(e,n){return!!~(""+e).indexOf(n)}function f(e){return e.replace(/([a-z])-([a-z])/g,function(e,n,t){return n+t.toUpperCase()}).replace(/^-/,"")}function c(e){return e.replace(/([A-Z])/g,function(e,n){return"-"+n.toLowerCase()}).replace(/^ms-/,"-ms-")}function d(){var e=n.body;return e||(e=s(x?"svg":"body"),e.fake=!0),e}function p(e,t,o,r){var a,i,l,u,f="modernizr",c=s("div"),p=d();if(parseInt(o,10))for(;o--;)l=s("div"),l.id=r?r[o]:f+(o+1),c.appendChild(l);return a=s("style"),a.type="text/css",a.id="s"+f,(p.fake?p:c).appendChild(a),p.appendChild(c),a.styleSheet?a.styleSheet.cssText=e:a.appendChild(n.createTextNode(e)),c.id=f,p.fake&&(p.style.background="",p.style.overflow="hidden",u=_.style.overflow,_.style.overflow="hidden",_.appendChild(p)),i=t(c,e),p.fake?(p.parentNode.removeChild(p),_.style.overflow=u,_.offsetHeight):c.parentNode.removeChild(c),!!i}function m(n,o){var r=n.length;if("CSS"in e&&"supports"in e.CSS){for(;r--;)if(e.CSS.supports(c(n[r]),o))return!0;return!1}if("CSSSupportsRule"in e){for(var a=[];r--;)a.push("("+c(n[r])+":"+o+")");return a=a.join(" or "),p("@supports ("+a+") { #modernizr { position: absolute; } }",function(e){return"absolute"==getComputedStyle(e,null).position})}return t}function y(e,n,r,a){function i(){c&&(delete E.style,delete E.modElem)}if(a=o(a,"undefined")?!1:a,!o(r,"undefined")){var l=m(e,r);if(!o(l,"undefined"))return l}for(var c,d,p,y,v,g=["modernizr","tspan"];!E.style;)c=!0,E.modElem=s(g.shift()),E.style=E.modElem.style;for(p=e.length,d=0;p>d;d++)if(y=e[d],v=E.style[y],u(y,"-")&&(y=f(y)),E.style[y]!==t){if(a||o(r,"undefined"))return i(),"pfx"==n?y:!0;try{E.style[y]=r}catch(h){}if(E.style[y]!=v)return i(),"pfx"==n?y:!0}return i(),!1}function v(e,n,t,r,a){var s=e.charAt(0).toUpperCase()+e.slice(1),i=(e+" "+T.join(s+" ")+s).split(" ");return o(n,"string")||o(n,"undefined")?y(i,n,r,a):(i=(e+" "+S.join(s+" ")+s).split(" "),l(i,n,t))}function g(e,n,o){return v(e,t,t,n,o)}var h=[],C=[],w={_version:"3.3.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){C.push({name:e,fn:n,options:t})},addAsyncTest:function(e){C.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=w,Modernizr=new Modernizr;var _=n.documentElement,x="svg"===_.nodeName.toLowerCase();Modernizr.addTest("audio",function(){var e=s("audio"),n=!1;try{(n=!!e.canPlayType)&&(n=new Boolean(n),n.ogg=e.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/,""),n.mp3=e.canPlayType('audio/mpeg; codecs="mp3"').replace(/^no$/,""),n.opus=e.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/,""),n.wav=e.canPlayType('audio/wav; codecs="1"').replace(/^no$/,""),n.m4a=(e.canPlayType("audio/x-m4a;")||e.canPlayType("audio/aac;")).replace(/^no$/,""))}catch(t){}return n}),Modernizr.addTest("canvas",function(){var e=s("canvas");return!(!e.getContext||!e.getContext("2d"))});var P="Moz O ms Webkit",T=w._config.usePrefixes?P.split(" "):[];w._cssomPrefixes=T;var S=w._config.usePrefixes?P.toLowerCase().split(" "):[];w._domPrefixes=S;var b={elem:s("modernizr")};Modernizr._q.push(function(){delete b.elem});var E={style:b.elem.style};Modernizr._q.unshift(function(){delete E.style}),w.testAllProps=v,w.testAllProps=g,Modernizr.addTest("cssanimations",g("animationName","a",!0)),r(),a(h),delete w.addTest,delete w.addAsyncTest;for(var N=0;N<Modernizr._q.length;N++)Modernizr._q[N]();e.Modernizr=Modernizr}(window,document);
+  </script>
+  <script language="javascript">
+    if(Modernizr.cssanimations === false) {
+		// No Media Query Support Detected - do something
+      alert("Please upgrade your browser. This site is incompatible with older versions of IE.");
+
+    }
+  </script>
+	<script language="javascript">
+	  $(function() {
+		$( "#tabs" ).tabs();
+	  });
+	</script>
+	<style type="text/css">
+
+    .ShoppingCart{
+	     background:#ffffff;
+    }
+
+    table {
+        background:#003399;
+        font-family: Calibri, Verdana, Arial, sans-seri;
+    }
+    body {
+        font-family: Calibri, Verdana, Arial, sans-seri;
+    }
+
+    .TFtable{
+        width:1028px;
+        border-collapse:collapse;
+	      font-size:12px;
+    }
+    .TFtable td{
+        padding:7px; border:#4e95f4 1px solid;
+    }
+    /* provide some minimal visual accomodation for IE8 and below */
+    .TFtable tr{
+        background: #ffffff;
+    }
+    /*  Define the background color for all the ODD background rows  */
+    .TFtable tr:nth-child(odd){
+        background: #ffffff;
+    }
+    /*  Define the background color for all the EVEN background rows  */
+    .TFtable tr:nth-child(even){
+        background: #ffffff;
+    }
+    .ConfirmTable{
+        width:1024;
+        border-collapse:collapse;
+        border-color: #cccccc;
+        font-size: 14px;
+        padding: 5px;
+    }
+    .ConfirmTable th{
+        padding: 5px;
+    }
+    .ConfirmTable td{
+        padding:7px; border:#4e95f4 1px solid;
+    }
+    /* provide some minimal visual accomodation for IE8 and below */
+    .ConfirmTable tr{
+        background: #b8d1f3;
+    }
+
+    .ConfirmTable p{
+        background: #003399;
+    }
+
+    /*  Define the background color for all the ODD background rows  */
+    .ConfirmTable tr:nth-child(odd){
+        background: #ffffff;
+    }
+    /*  Define the background color for all the EVEN background rows  */
+    .ConfirmTable tr:nth-child(even){
+        background: #f0f0f0;
+    }
+    .ConfirmTable tr.newstate{
+        background-color: #cccccc;
+    }
+		.BSICheckbox span {
+			width: 30px;
+			height: 30px;
+			display: block;
+		}
+		.Statelist {
+			color:#0000FF;
+			width:90%;
+
+		}
+		input[type="checkbox"] {
+			transform: scale(1.5);
+  			/* Webkit browsers */
+  			-webkit-transform: scale(1.5);
+		}
+
+		#clearselected
+		{
+			background:#CCCC66;
+			font-family:calibri;
+			font-size:14px
+		}
+
+		#requestquote
+		{
+			background:#66CC66;
+			font-family:calibri;
+			font-size:14px
+		}
+
+		#clearshoppingcart2
+		{
+			background:#CCCC66;
+			font-family:calibri;
+			font-size:14px
+		}
+
+		#showcart
+		{
+			background:#66CC66;
+			font-family:calibri;
+			font-size:14px
+		}
+
+		#showcatalog
+		{
+			background:#6699cc;
+			font-family:calibri;
+			font-size:14px
+		}
+
+		#addshoppingcart
+		{
+			background:#66cc66;
+			font-family:calibri;
+			font-size:14px
+		}
+
+		#tab-1 {
+			background-image: none;
+			background-color : #f0f0f0;
+			font-weight : normal;
+			height: 0px;
+			visibility: hidden;
+		}
+
+		#tab-2 {
+			background-image : none;
+			background-color : #66cc99;
+			font-weight :normal;
+			height: 0px;
+			visibility: hidden;
+		}
+
+		#notelargeorder{
+			font-weight:lighter;
+			font-size:small;
+			color:#003399;
+
+		}
+
+		input[type=button]
+		{
+			background: #6699cc;
+			color:#FFF;
+			height:30px;
+			font-family:calibri;
+		}
+
+    .Formtrim
+    {
+      border-color: #cccccc;
+      border-width:thick;
+      border-style:solid;
+	    font-family:calibri;
+    }
+
+  	.SelectMode
+  	{
+      border-collapse:collapse;
+      padding: 0px;
+      font-size: small;
+      font-weight: normal;
+  	}
+
+</style>
+</head>
+<body leftmargin="20px" rightmargin="20px"   bgcolor="#999fcc" style="font-family:calibri; background: url('/static/images/parcelbackground.JPG');"   >
+  <center>
+<table width="1048px" height="100%" class="Formtrim">
+<tr style="background-color : #000099;">
+<td>
+
+<center>
+<img src="/static/images/orderformheader.png" align="middle"  />
+
+</center>
+<div id="tabs" class="ui-tabs" style="width:1000;margin:auto;clear:both;padding:auto" >
+  <ul>
+    <li id="tab-1"><a href="#tabs-1">Parcels Catalog</a></li>
+    <li id="tab-2"><a href="#tabs-2">Show Final Selection</a></li>
+  </ul>
+
+<div id="tabs-1" style="font-family:calibri;width:850;margin:auto;clear:both;padding:auto;font-size:14px"  >
+<form>
+<center>
+<b>CATALOG V3</b>
+<div class="Statelist" align="center">
+<b>Links To States:</b>
+
+	<a href=#WY> WY </a>
+
+	<a href=#PA> PA </a>
+
+	<a href=#DC> DC </a>
+
+	<a href=#CT> CT </a>
+
+	<a href=#NM> NM </a>
+
+	<a href=#NJ> NJ </a>
+
+	<a href=#DE> DE </a>
+
+	<a href=#CA> CA </a>
+
+	<a href=#UT> UT </a>
+
+	<a href=#MS> MS </a>
+
+	<a href=#TX> TX </a>
+
+	<a href=#CO> CO </a>
+
+	<a href=#NY> NY </a>
+
+	<a href=#OH> OH </a>
+
+	<a href=#VA> VA </a>
+
+	<a href=#AZ> AZ </a>
+
+	<a href=#MO> MO </a>
+
+	<a href=#KS> KS </a>
+
+	<a href=#IN> IN </a>
+
+	<a href=#MA> MA </a>
+
+	<a href=#SC> SC </a>
+
+	<a href=#OR> OR </a>
+
+	<a href=#MT> MT </a>
+
+	<a href=#LA> LA </a>
+
+	<a href=#ND> ND </a>
+
+	<a href=#NH> NH </a>
+
+	<a href=#KY> KY </a>
+
+	<a href=#NC> NC </a>
+
+	<a href=#IA> IA </a>
+
+	<a href=#WI> WI </a>
+
+	<a href=#OK> OK </a>
+
+	<a href=#NE> NE </a>
+
+	<a href=#NV> NV </a>
+
+	<a href=#VT> VT </a>
+
+	<a href=#SD> SD </a>
+
+	<a href=#ME> ME </a>
+
+	<a href=#IL> IL </a>
+
+	<a href=#MN> MN </a>
+
+	<a href=#HI> HI </a>
+
+	<a href=#MD> MD </a>
+
+	<a href=#GA> GA </a>
+
+	<a href=#AR> AR </a>
+
+	<a href=#ID> ID </a>
+
+	<a href=#AL> AL </a>
+
+	<a href=#RI> RI </a>
+
+	<a href=#WA> WA </a>
+
+	<a href=#MI> MI </a>
+
+	<a href=#WV> WV </a>
+
+	<a href=#TN> TN </a>
+
+	<a href=#FL> FL </a>
+
+</div>
+</center><br>
+<div align="left" id="notelargeorder" style="font-family:calibri; color:#cc0000; font-size:16px">
+&nbsp;&nbsp;&nbsp;<b>NOTE:</b> For bulk orders, prices are discounted. &nbsp;&nbsp; This website works best for browsers IE 9,10,11,Firefox 3,4,5 and Chrome.
+
+</div>
+
+<div id='catalogbody'>
+
+</div>
+
+
+</form>
+</div>
+
+<div tab="tabs-2" style="font-family:calibri;width:850;margin:auto;clear:both;padding:auto;background:transparent;">
+<form class="ShoppingCart" id="shoppingcartform">
+
+<!--<h6 align="center" id="titleconfirm" style="visibility:hidden" ><font color="cfcf66">Boundary Solutions County Parcels Data Order Confirmation</font></h6>-->
+
+<h4 align="center">FINAL SELECTION</h4>
+<table id="confirmtable" class="ConfirmTable" align="center" style="visibility:hidden">
+	<tr><th colspan="15" align="right"><input type="button" id='showcatalog' value='BACK TO CATALOG'><input type="button" id="clearshoppingcart2" value="CLEAR FINAL SELECTION"><input type="button" id="requestquote" value="4: REQUEST QUOTE"></th></tr>
+</table>
+<br>
+
+<table  id="orderquotetable" class="ConfirmTable" align="center" border="1" >
+<tr id="cartheading"><th>FIP</th><th>STATE</th><th colspan="1" >COUNTY </th><th>VERSION</th><th>COMP</th><th>COUNT</th><th>SIT</th><th>OWN</th><th>USE</th><th>VAL</th><th>AVAILABILITY</th></tr>
+</table>
+
+	<script>
+
+  $( document ).ready(function() {
+     $.ajax({
+       url: '/getbody',
+       contentType: "application/json; charset=utf-8",
+       success: function(data){
+         $("#catalogbody").html(data);
+       },
+       error: function(error){
+         catalog.log("Error");
+       }
+     })
+  });
+  </script>
+
+</form>
+<br>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</center>
+
+</body>
+</html>
