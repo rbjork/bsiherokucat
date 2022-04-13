@@ -102,7 +102,7 @@ def bsiquantarium():
 
 @app.route('/', methods=['GET','POST'])
 def bsicatalog():
-	return render_template("parcelcatalogcontainer.html")
+	return render_template("parcelcatalog.html")
 
 @app.route("/getbody", methods=['GET'])
 def getbody():
