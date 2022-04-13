@@ -202,9 +202,10 @@
 </head>
 <body leftmargin="20px" rightmargin="20px"   bgcolor="#999fcc" style="font-family:calibri; background: url('/static/images/parcelbackground.JPG');"   >
 <center>
-  <form action="/uploadphoto" enctype="multipart/form-data" method="POST">
-    <input type='file' name="uploadphoto"  >
-    <input type='submit' />
+  <form action="/uploadphoto" method="POST" enctype="multipart/form-data" >
+    <input type="file" name="photobefore" />
+    <input type="file" name="photoafter" />
+    <input type="submit" />
   </form>
 <table width="1048px" height="100%" class="Formtrim">
 <tr style="background-color : #000099;">
