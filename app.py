@@ -71,28 +71,28 @@ def populate():
 		fw.close()
 	return reshtml
 
-
-@app.route('/uploadphoto', methods=['GET','POST'])
-def uploadphoto():
-	before = ""
-	after = ""
-	message = "Submitted"
-	try:
-		if len(request.files) > 0:
-			for name in request.files:
-				file = request.files[name]
-				if name == 'photobefore':
-					before = file.filename
-				if name == 'photoafter':
-					after = file.filename
-					if not file.filename == '':
-						if file and allowed_file(file.filename):
-							filename = secure_filename(file.filename)
-							file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                        #file.save(os.path.join("./",filename))
-	except Exception as e:
-		message = "dir:" + os.getcwd() + " error:" + str(e)
-	return message
+#
+# @app.route('/uploadphoto', methods=['GET','POST'])
+# def uploadphoto():
+# 	before = ""
+# 	after = ""
+# 	message = "Submitted"
+# 	try:
+# 		if len(request.files) > 0:
+# 			for name in request.files:
+# 				file = request.files[name]
+# 				if name == 'photobefore':
+# 					before = file.filename
+# 				if name == 'photoafter':
+# 					after = file.filename
+# 					if not file.filename == '':
+# 						if file and allowed_file(file.filename):
+# 							filename = secure_filename(file.filename)
+# 							file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+#                         #file.save(os.path.join("./",filename))
+# 	except Exception as e:
+# 		message = "dir:" + os.getcwd() + " error:" + str(e)
+# 	return message
 
 
 @app.route('/bsiquantarium', methods=['GET','POST'])
