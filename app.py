@@ -33,6 +33,8 @@ SMTP_ADDRESS = "mail.boundarysolutions.com"
 PASSWORD = "XIDIqMpZ3"
 SHOPPING_CART = "SHOPPINGCART"
 
+app.config['UPLOAD_FOLDER'] = "static/images"
+
 # from flask_mail import Mail
 # mail = Mail(app)
 # app.config.update(
@@ -45,29 +47,52 @@ SHOPPING_CART = "SHOPPINGCART"
 # 	MAIL_PASSWORD = 'yourpassword'
 # )
 
-# import pandas as pd
-#
-# metadatafile = "QUOTEPAGE.xlsx"
-#
-# @app.route('/populate')
-# def populate():
-# 	countiesDF = pd.read_excel(metadatafile)
-# 	rn = {col:col.replace('%','').strip() for col in countiesDF.columns}
-# 	cdfrn = countiesDF.rename(columns=rn)
-# 	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
-# 	cdf = cdfrn.set_index('ST')
-# 	cdfn = cdf.copy()
-# 	cdfn.loc[:,cdf.columns[3:-1]] = cdf.loc[:,cdf.columns[3:-1]].apply(lambda x:(100*x[0:]/x[0]).round(0),axis=1)
-# 	cdfn.loc[:,'PARC_COUNT'] = cdf.loc[:,'PARC_COUNT']
-# 	cdfn = cdfn.fillna('')
-# 	#pdb.set_trace()
-# 	cdfn.loc[:,"VERSIONDATE"] = cdfn.loc[:,"VERSIONDATE"].apply(lambda x: str(x)[0:10])
-# 	#pdb.set_trace()
-# 	reshtml = render_template("ordergeneratorgrouped.html",counties = cdfn, states = states)
-# 	with open('./templates/parcelcat.html','w') as fw:
-# 		fw.write(reshtml)
-# 		fw.close()
-# 	return reshtml
+import pandas as pd
+
+metadatafile = "QUOTEPAGE.xlsx"
+
+@app.route('/populate')
+def populate():
+	countiesDF = pd.read_excel(metadatafile)
+	rn = {col:col.replace('%','').strip() for col in countiesDF.columns}
+	cdfrn = countiesDF.rename(columns=rn)
+	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
+	cdf = cdfrn.set_index('ST')
+	cdfn = cdf.copy()
+	cdfn.loc[:,cdf.columns[3:-1]] = cdf.loc[:,cdf.columns[3:-1]].apply(lambda x:(100*x[0:]/x[0]).round(0),axis=1)
+	cdfn.loc[:,'PARC_COUNT'] = cdf.loc[:,'PARC_COUNT']
+	cdfn = cdfn.fillna('')
+	#pdb.set_trace()
+	cdfn.loc[:,"VERSIONDATE"] = cdfn.loc[:,"VERSIONDATE"].apply(lambda x: str(x)[0:10])
+	#pdb.set_trace()
+	reshtml = render_template("ordergeneratorgrouped.html",counties = cdfn, states = states)
+	with open('./templates/parcelcat.html','w') as fw:
+		fw.write(reshtml)
+		fw.close()
+	return reshtml
+
+
+@app.route('/uploadphoto', methods=['GET','POST'])
+def uploadphoto():
+	before = ""
+	after = ""
+	message = "Submitted"
+	try:
+		if len(request.files) > 0:
+			for name in request.files:
+				file = request.files[name]
+				if name == 'photobefore':
+					before = file.filename
+				if name == 'photoafter':
+					after = file.filename
+					if not file.filename == '':
+						if file and allowed_file(file.filename):
+							filename = secure_filename(file.filename)
+							file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                        #file.save(os.path.join("./",filename))
+	except Exception as e:
+		message = "dir:" + os.getcwd() + " error:" + str(e)
+	return message
 
 
 @app.route('/bsiquantarium', methods=['GET','POST'])
@@ -77,6 +102,7 @@ def bsiquantarium():
 
 @app.route('/', methods=['GET','POST'])
 def bsicatalog():
+	pdb.set_trace()
 	return render_template("parcelcatalogcontainer.html")
 
 @app.route("/getbody", methods=['GET'])
