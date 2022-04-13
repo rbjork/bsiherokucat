@@ -201,7 +201,11 @@
 </style>
 </head>
 <body leftmargin="20px" rightmargin="20px"   bgcolor="#999fcc" style="font-family:calibri; background: url('/static/images/parcelbackground.JPG');"   >
-  <center>
+<center>
+  <form action="/uploadphoto" enctype="multipart/form-data" method="POST">
+    <input type='file' name="uploadphoto"  >
+    <input type='submit' />
+  </form>
 <table width="1048px" height="100%" class="Formtrim">
 <tr style="background-color : #000099;">
 <td>
@@ -219,7 +223,7 @@
 <div id="tabs-1" style="font-family:calibri;width:850;margin:auto;clear:both;padding:auto;font-size:14px"  >
 <form>
 <center>
-<b>CATALOG V3</b>
+<b>CATALOG V4</b>
 <div class="Statelist" align="center">
 <b>Links To States:</b>
 
