@@ -102,7 +102,6 @@ def bsiquantarium():
 
 @app.route('/', methods=['GET','POST'])
 def bsicatalog():
-	pdb.set_trace()
 	return render_template("parcelcatalogcontainer.html")
 
 @app.route("/getbody", methods=['GET'])
