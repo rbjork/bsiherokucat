@@ -86,9 +86,10 @@ def uploadphoto():
 					before = file.filename
 				if name == 'photoafter':
 					after = file.filename
-					if not file.filename == '':
-						filename = secure_filename(file.filename)
-						file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+				if not file.filename == '':
+					filename = secure_filename(file.filename)
+					file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+					message = "file written " + os.getcwd() + "/static/images/" + filename
                         #file.save(os.path.join("./",filename))
 	except Exception as e:
 		message = "dir:" + os.getcwd() + " error:" + str(e)
