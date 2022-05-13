@@ -52,6 +52,7 @@ app.config['UPLOAD_FOLDER'] = "static/images"
 
 metadatafile = "QUOTEPAGE.xlsx"
 #
+#
 # @app.route('/populate')
 # def populate():
 # 	countiesDF = pd.read_excel(metadatafile)
@@ -60,7 +61,8 @@ metadatafile = "QUOTEPAGE.xlsx"
 # 	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
 # 	cdf = cdfrn.set_index('ST')
 # 	cdfn = cdf.copy()
-# 	cdfn.loc[:,cdf.columns[3:-1]] = cdf.loc[:,cdf.columns[3:-1]].apply(lambda x:(100*x[0:]/x[0]).round(0),axis=1)
+# 	pdb.set_trace()
+# 	cdfn.loc[:,cdf.columns[[2,4,5,6,7]]] = cdf.loc[:,cdf.columns[[2,4,5,6,7]]].apply(lambda x:(100*x[0:]/x[0]).round(0),axis=1)
 # 	cdfn.loc[:,'PARC_COUNT'] = cdf.loc[:,'PARC_COUNT']
 # 	cdfn = cdfn.fillna('')
 # 	#pdb.set_trace()
