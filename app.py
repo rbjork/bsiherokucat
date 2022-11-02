@@ -21,6 +21,8 @@ import json
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
+import logging
+
 
 #import psycopg2
 app = Flask(__name__)
@@ -48,31 +50,31 @@ app.config['UPLOAD_FOLDER'] = "static/images"
 # 	MAIL_PASSWORD = 'yourpassword'
 # )
 
-#import pandas as pd
+import pandas as pd
 
 metadatafile = "QUOTEPAGE.xlsx"
 #
 #
-# @app.route('/populate')
-# def populate():
-# 	countiesDF = pd.read_excel(metadatafile)
-# 	rn = {col:col.replace('%','').strip() for col in countiesDF.columns}
-# 	cdfrn = countiesDF.rename(columns=rn)
-# 	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
-# 	cdf = cdfrn.set_index('ST')
-# 	cdfn = cdf.copy()
-# 	pdb.set_trace()
-# 	cdfn.loc[:,cdf.columns[[2,4,5,6,7]]] = cdf.loc[:,cdf.columns[[2,4,5,6,7]]].apply(lambda x:(100*x[0:]/x[0]).round(0),axis=1)
-# 	cdfn.loc[:,'PARC_COUNT'] = cdf.loc[:,'PARC_COUNT']
-# 	cdfn = cdfn.fillna('')
-# 	#pdb.set_trace()
-# 	cdfn.loc[:,"VERSIONDATE"] = cdfn.loc[:,"VERSIONDATE"].apply(lambda x: str(x)[0:10])
-# 	#pdb.set_trace()
-# 	reshtml = render_template("ordergeneratorgrouped.html",counties = cdfn, states = states)
-# 	with open('./templates/parcelcat.html','w') as fw:
-# 		fw.write(reshtml)
-# 		fw.close()
-# 	return reshtml
+@app.route('/populate')
+def populate():
+	countiesDF = pd.read_excel(metadatafile)
+	rn = {col:col.replace('%','').strip() for col in countiesDF.columns}
+	cdfrn = countiesDF.rename(columns=rn)
+	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
+	cdf = cdfrn.set_index('ST')
+	cdfn = cdf.copy()
+	pdb.set_trace()
+	cdfn.loc[:,cdf.columns[[4,5,6,7,8]]] = cdf.loc[:,cdf.columns[[4,5,6,7,8]]].apply(lambda x:(100*x[0:]/x[0]).round(0),axis=1)
+	cdfn.loc[:,'PARC_COUNT'] = cdf.loc[:,'PARC_COUNT'].round().astype(str)
+	cdfn = cdfn.fillna('')
+	#pdb.set_trace()
+	cdfn.loc[:,"VERSIONDATE"] = cdfn.loc[:,"VERSIONDATE"].apply(lambda x: str(x)[0:10])
+	#pdb.set_trace()
+	reshtml = render_template("ordergeneratorgrouped.html",counties = cdfn, states = states)
+	with open('./templates/parcelcat.html','w') as fw:
+		fw.write(reshtml)
+		fw.close()
+	return reshtml
 
 
 @app.route('/uploadphoto', methods=['GET','POST'])
@@ -101,7 +103,6 @@ def uploadphoto():
 @app.route('/bsiquantarium', methods=['GET','POST'])
 def bsiquantarium():
 	return render_template("BSIQ.html")
-
 
 @app.route('/', methods=['GET','POST'])
 def bsicatalog():
@@ -315,6 +316,8 @@ def sendEmail(customername, customeremail, text):
 	message['From'] = email.utils.formataddr((sender_name, sender_email))
 	message['To'] = email.utils.formataddr((recipient_name, recipient_email))
 
+	logging.info("Sender:"+sender_email+ "  subject:"+subject + "  text:" + text)
+
 	# prepare plain and html message parts
 	part1 = MIMEText(body_plain, 'plain')
 	#part2 = MIMEText(body_html, 'html')
@@ -358,4 +361,6 @@ def sendEmail(customername, customeremail, text):
 if __name__ == "__main__":
 	#res = populate()
 	app.config['SESSION_TYPE'] = 'filesystem'
+
+	logging.basicConfig(filename=f'Logging.log', level=logging.WARNING)
 	app.run()
