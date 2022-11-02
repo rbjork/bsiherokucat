@@ -362,5 +362,5 @@ if __name__ == "__main__":
 	#res = populate()
 	app.config['SESSION_TYPE'] = 'filesystem'
 
-	logging.basicConfig(filename=f'Logging.log', level=logging.WARNING)
+	logging.basicConfig(filename=f'Logemails.log', level=logging.WARNING)
 	app.run()
