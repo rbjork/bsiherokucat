@@ -85,11 +85,11 @@ def userofnpnas():
 		name = data['name']
 		company = data['company']
 		token = data['token']
-		sendEmail(name, email, company, token)
+		sendEmailNPN(name, email, company, token)
 		with open('npnasusers.txt','a') as fw:
 			fw.write(f"name:{name},company:{company},email:{email}\n")
 	else:
-		sendEmail('', email, 'login made')
+		sendEmailNPN('', email, 'login made','')
 
 	return jsonify({'success':True})
 
@@ -299,6 +299,81 @@ def getcustomer():
 # 	smtp.quit()
 
 
+def sendEmailNPN(customername, customeremail, text, token=''):
+
+	mailertogo_port     = environ.get('MAILERTOGO_SMTP_PORT', 587)
+	mailertogo_host     = environ.get('MAILERTOGO_SMTP_HOST')
+	mailertogo_user     = environ.get('MAILERTOGO_SMTP_USER')
+	mailertogo_password = environ.get('MAILERTOGO_SMTP_PASSWORD')
+	mailertogo_domain   = environ.get('MAILERTOGO_DOMAIN', "bsiquotepage.com")
+
+	print('mailertogo_host',mailertogo_host)
+	print('mailertogo_port',mailertogo_port)
+	print('mailertogo_user',mailertogo_user)
+	print('mailertogo_password',mailertogo_password)
+	print('mailertogo_domain',mailertogo_domain)
+
+	sender_user = "quotepage"
+	sender_email = "@".join([sender_user, mailertogo_domain])
+	sender_name = 'customer'
+
+	# recipient
+	recipient_email = 'dklein@boundarysolutions.com' # change to recipient email. Make sure to use a real email address in your tests to avoid hard bounces and protect your reputation as a sender.
+	recipient_name = 'Dennis'
+	# subject
+	subject = 'NPNAS Activity'
+	# text body
+	body_plain = (text + " from " + customername + " at " + customeremail)
+	# html body
+	line_break = '\n' #used to replace line breaks with html breaks
+
+	# create message container
+	message = MIMEMultipart('alternative')
+	message['Subject'] = subject
+	message['From'] = email.utils.formataddr((sender_name, sender_email))
+	message['To'] = email.utils.formataddr((recipient_name, recipient_email))
+
+	logging.info("Sender:"+sender_email+ "  subject:"+subject + "  text:" + text)
+
+	# prepare plain and html message parts
+	part1 = MIMEText(body_plain, 'plain')
+	#part2 = MIMEText(body_html, 'html')
+	# attach parts to message
+	message.attach(part1)
+	#message.attach(part2)
+	# send the message.
+	try:
+		print("mailertogo_host",mailertogo_host)
+		server = smtplib.SMTP(mailertogo_host, mailertogo_port)
+		#rtn = server.connect(mailertogo_host, mailertogo_port)
+	except Exception as e:
+		print ("Error: ", e)
+	else:
+		print ("Connected!")
+	try:
+		server.ehlo()
+		server.starttls()
+		server.ehlo()
+	except Exception as e:
+		print ("Error: ", e)
+	else:
+		print ("ehlo and startls ok!")
+	try:
+		server.login(mailertogo_user, mailertogo_password)
+	except Exception as e:
+		print ("Error: ", e)
+	else:
+		print ("Login ok!")
+	try:
+		server.sendmail(sender_email, recipient_email, message.as_string())
+		server.sendmail(sender_email, 'grbtxtmsg@gmail.com', message.as_string())
+		server.close()
+	except Exception as e:
+		print ("Error: ", e)
+	else:
+		print ("Login and Email sent!")
+
+
 def sendEmail(customername, customeremail, text, token=''):
 
 	mailertogo_port     = environ.get('MAILERTOGO_SMTP_PORT', 587)
@@ -372,6 +447,9 @@ def sendEmail(customername, customeremail, text, token=''):
 		print ("Error: ", e)
 	else:
 		print ("Login and Email sent!")
+
+
+
 
 
 
