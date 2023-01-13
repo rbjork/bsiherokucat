@@ -85,7 +85,7 @@ def userofnpnas():
 		name = data['name']
 		company = data['company']
 		token = data['token']
-		sendEmail(name, email, company + ". Token request")
+		sendEmail(name, email, company, token)
 	else:
 		sendEmail('', email, 'login made')
 	with open('npnasusers.txt','a') as fw:
@@ -298,7 +298,7 @@ def getcustomer():
 # 	smtp.quit()
 
 
-def sendEmail(customername, customeremail, text):
+def sendEmail(customername, customeremail, text, token=''):
 
 	mailertogo_port     = environ.get('MAILERTOGO_SMTP_PORT', 587)
 	mailertogo_host     = environ.get('MAILERTOGO_SMTP_HOST')
