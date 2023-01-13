@@ -86,10 +86,11 @@ def userofnpnas():
 		company = data['company']
 		token = data['token']
 		sendEmail(name, email, company, token)
+		with open('npnasusers.txt','a') as fw:
+			fw.write(f"name:{name},company:{company},email:{email}\n")
 	else:
 		sendEmail('', email, 'login made')
-	with open('npnasusers.txt','a') as fw:
-		fw.write(f"name:{name},company:{company},email:{email}\n")
+
 	return jsonify({'success':True})
 
 
