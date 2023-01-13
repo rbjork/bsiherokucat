@@ -53,6 +53,7 @@ app.config['UPLOAD_FOLDER'] = "static/images"
 #import pandas as pd
 
 metadatafile = "QUOTEPAGE.xlsx"
+
 #
 #
 # @app.route('/populate')
@@ -75,6 +76,21 @@ metadatafile = "QUOTEPAGE.xlsx"
 # 		fw.write(reshtml)
 # 		fw.close()
 # 	return reshtml
+
+@app.route('/userofnpnas')
+def userofnpnas():
+	data = request.get_json()
+	email = data['email']
+	if 'token' in data:
+		name = data['name']
+		company = data['company']
+		token = data['token']
+		sendEmail(name, email, company + ". Token request")
+	else:
+		sendEmail('', email, 'login made')
+	with open('npnasusers.txt','a') as fw:
+		fw.write(f"name:{name},company:{company},email:{email}\n")
+	return jsonify({'success':True})
 
 
 @app.route('/uploadphoto', methods=['GET','POST'])
