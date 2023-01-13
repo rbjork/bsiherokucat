@@ -77,7 +77,7 @@ metadatafile = "QUOTEPAGE.xlsx"
 # 		fw.close()
 # 	return reshtml
 
-@app.route('/userofnpnas')
+@app.route('/userofnpnas',methods=['POST','GET'])
 def userofnpnas():
 	data = request.get_json()
 	email = data['email']
