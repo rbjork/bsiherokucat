@@ -17,7 +17,7 @@ import json
 import os
 import random
 import json
-import numpy as np
+#import numpy as np
 #import pandas as pd
 from datetime import datetime
 from werkzeug.utils import secure_filename
