@@ -80,8 +80,8 @@ function goBack() {
       var titles = "{{titles|safe}}".split('+++');
       var assemble = []
       for(var t of titles){
-        title = t.split(' ').join('');
-        assemble.push({'title':title,'file':t});
+        file = t.split(' ').join('') + '.html';
+        assemble.push({'title':t,'file':file});
       }
       model_data['titles'] = assemble;
       var app = new Vue({   // Right Panel Control
