@@ -1,0 +1,100 @@
+<html>
+<head>
+  <title>MyDefensibleSpace</title>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+<style>
+   body {
+          background-image: url("{{url_for('static',filename='./drygrassbackdrop.jpg')}}");
+	   //background-image:url("./static/images/drygrassbackdrop.jpg");
+
+     background-color:#FFF889;
+   }
+
+   .input {
+     color:#000000;
+   }
+
+   table, th, td {
+     padding: 10px;
+     text-align:left;
+	 border-collapse: collapse;
+   }
+
+   input {
+	   width:200px;
+   }
+
+   .rowheader {
+	   text-align:right;
+   }
+
+   form {
+	   background-color:#906666;
+	   width:350px;
+   }
+
+   .buttonclass {
+	   background-color:#F0D3AF;
+   }
+
+   table {
+      border: 2px solid #000099;
+      background-color:white;
+    }
+</style>
+<script>
+	function gotohome(){
+		window.location.href = "ParcelCatalog.html";
+	}
+</script>
+ <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js'></script>
+</head>
+<body style="background-color:#003099;font-family:sans-serif; color:#000099; background: url('/static/images/parcelbackground.JPG');"" >
+  <br><br>
+
+  <h1 style="text-align:center;">BOUNDARY SOLUTIONS BLOGS</h1>
+  <center>
+  <div id="app">
+      <table width="800px;background-color:99ccff;">
+        <thead>
+          <tr>
+            <th>TITLE</th><th>DATE</th>
+          </tr>
+        </thead>
+        <tbody style="background-color:#skyblue; color:navyblue; padding:10px; color:#0030cc;">
+          <tr v-for="(item, index) in titles"  >
+            <td v-on:click="blogselected(item)">[|item['title']|]</td><td>...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </center>
+    <script>
+      var model_data = {"titles":[{"title":"BUILDING UBIDS FUTURE OF ENERGY CONSERVATION", "file":"one.html"},{"title":"HOME HEATING AND COOLING", "file":"two.html"},{"title":"HOME LEAD CERTIFACTION AND HOME VALUE", "file":"three.html"}]};
+      var titles = "{{titles|safe}}".split('+++');
+      var assemble = []
+      for(var t of titles){
+        title = t.split(' ').join('');
+        assemble.push({'title':title,'file':t});
+      }
+      model_data['titles'] = assemble;
+      var app = new Vue({   // Right Panel Control
+        delimiters: ['[|', '|]'],
+        el: '#app',
+        data: model_data,
+        methods:{
+          blogselected: function(item){
+            console.log("selection");
+            window.location.href = "/blog/" + item['file'];
+          }
+        }
+      });
+    </script>
+</body>
+</html>

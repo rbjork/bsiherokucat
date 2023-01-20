@@ -1,0 +1,70 @@
+<html>
+<head>
+  <title>MyDefensibleSpace</title>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+<style>
+   body {
+          background-image: url("{{url_for('static',filename='./drygrassbackdrop.jpg')}}");
+	   //background-image:url("./static/images/drygrassbackdrop.jpg");
+
+
+   }
+
+   .input {
+     color:#000000;
+   }
+
+
+
+   input {
+	   width:200px;
+   }
+
+   .rowheader {
+	   text-align:right;
+   }
+
+
+
+   .buttonclass {
+	   background-color:#F0D3AF;
+   }
+
+   table {
+      border: 2px solid #000099;
+      background-color:white;
+    }
+</style>
+<script>
+	function gotohome(){
+		window.location.href = "ParcelCatalog.html";
+	}
+</script>
+ <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js'></script>
+</head>
+<body style="background-color:#003099;font-family:sans-serif; color:#000099; background: url('/static/images/parcelbackground.JPG');"" >
+  <br><br>
+  <h2 style="text-align:center;">BOUNDARY SOLUTIONS BLOG CREATION FORM</h2><br>
+  <center>
+    <form method="POST" action="/createblog" enctype="multipart/form-data" >
+      <table>
+        <tbody style="vertical-align:top;">
+        <tr><td>TITLE:</td><td><input type='text' style="width:100%;" name='title'/></td></tr>
+        <tr><td> BODY: </td><td>
+        <textarea rows=25 cols=70 name='body' style="text-align:left;"><p>&nbsp;&nbsp;</p>
+
+<p>&nbsp;&nbsp;</p>
+        </textarea></td></tr>
+        <tr><td colspan=2 style="text-align:right;"><input type='submit' style="background-color:#000099;color:white;"></td></tr>
+        </tbody>
+      </table>
+    </form>
+  </center>
+</body>
+</html>
