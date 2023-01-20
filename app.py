@@ -96,7 +96,7 @@ def createblog():
 	if request.method == 'POST':
 		title = request.form.get('title')
 		body = request.form.get('body')
-		with open(title.replace(' ','') + '.html','w') as fd:
+		with open('templates/'+title.replace(' ','') + '.html','w') as fd:
 			fd.write(body)
 		with open('titles.txt','a') as fd:
 			fd.write(title + "+++")
