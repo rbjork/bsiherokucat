@@ -83,6 +83,31 @@ app.config['UPLOAD_FOLDER'] = "static/images"
 # 		fw.close()
 # 	return reshtml
 
+@app.route('/blogtitles', methods=['GET'])
+def blogtitles():
+	return render_template('blogtitles.html')
+
+@app.route('/blog/<string:blogfile>', methods=['GET'])
+def getblog(blogfile):
+	return render_template(blogfile)
+
+@app.route('/createblog', methods=['GET','POST'])
+def createblog():
+	if request.method == 'POST':
+		title = request.form.get('title')
+		body = request.form.get('body')
+		with open(title.replace(' ','') + '.html','w') as fd:
+			fd.write(body)
+		with open('titles.txt','a') as fd:
+			fd.write(title + "+++")
+		with open('titles.txt','r') as fr:
+			titles = fr.read()
+		return render_template('blogtitles.html',titles=titles)
+	else:
+		return render_template('createblog.html')
+
+
+
 @app.route('/userofnpnas',methods=['POST','GET'])
 def userofnpnas():
 	data = request.get_json()
@@ -468,4 +493,4 @@ if __name__ == "__main__":
 	app.config['SESSION_TYPE'] = 'filesystem'
 
 	logging.basicConfig(filename=f'Logemails.log', level=logging.WARNING)
-	app.run()
+	app.run(debug=True)
