@@ -17,8 +17,8 @@ import json
 import os
 import random
 import json
-#import numpy as np
-#import pandas as pd
+import numpy as np
+# import pandas as pd
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
@@ -51,37 +51,37 @@ app.config['UPLOAD_FOLDER'] = "static/images"
 # 	MAIL_PASSWORD = 'yourpassword'
 # )
 
-# import pandas as pd
-#
-# metadatafile = "QUOTEPAGE.xlsx"
-#
-# @app.route('/populate')
-# def populate():
-# 	countiesDF = pd.read_excel(metadatafile)
-# 	rn = {col:col.replace('%','').strip() for col in countiesDF.columns}
-# 	cdfrn = countiesDF.rename(columns=rn)
-# 	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
-# 	cdf = cdfrn.set_index('ST')
-# 	cdfn = cdf.copy()
-# 	#pdb.set_trace()
-# 	cdfn.loc[:,cdf.columns[[4,5,6,7,8]]] = cdf.loc[:,cdf.columns[[4,5,6,7,8]]].apply(lambda x:(100*x[0:]/x[0]).round(0),axis=1)
-# 	cdfn.loc[:,'PARC_COUNT'] = cdf.loc[:,'PARC_COUNT'].apply(lambda x: '' if np.isnan(x) else str(round(x)))
-# 	cdfn = cdfn.fillna('')
-# 	#pdb.set_trace()
-# 	cdfn.loc[:,"VERSIONDATE"] = cdfn.loc[:,"VERSIONDATE"].apply(lambda x: str(x)[0:10])
-# 	cdfn.loc[:,"VERSIONDATE"] = cdfn.loc[:,"VERSIONDATE"].apply(lambda x: '' if x == 'NaT' else x)
-# 	cdfn.rename(columns={'COMP.':'COMP'}, inplace=True)
-# 	#cdfn.loc[:,'PARC_COUNT'] = cdfn.loc[:,'PARC_COUNT'].apply(lambda x: '' if not x.isdigit() else x)
-# 	#for state, statecounties in cdfn.groupby(level=0):
-# 	#	for i,row in statecounties.iterrows():
-# 	#		print(row)
-#
-# 	#pdb.set_trace()
-# 	reshtml = render_template("ordergeneratorgrouped.html",counties = cdfn, states = states)
-# 	with open('./templates/parcelcat.html','w') as fw:
-# 		fw.write(reshtml)
-# 		fw.close()
-# 	return reshtml
+import pandas as pd
+
+metadatafile = "QUOTEPAGE.xlsx"
+
+@app.route('/populate')
+def populate():
+	countiesDF = pd.read_excel(metadatafile)
+	rn = {col:col.replace('%','').strip() for col in countiesDF.columns}
+	cdfrn = countiesDF.rename(columns=rn)
+	states = list({c['ST'].strip().upper() for i,c in cdfrn.iterrows() if len(c['ST']) == 2})
+	cdf = cdfrn.set_index('ST')
+	cdfn = cdf.copy()
+	#pdb.set_trace()
+	cdfn.loc[:,cdf.columns[[4,5,6,7,8]]] = cdf.loc[:,cdf.columns[[4,5,6,7,8]]].apply(lambda x:(100*x[0:]/x[0]).round(0),axis=1)
+	cdfn.loc[:,'PARC_COUNT'] = cdf.loc[:,'PARC_COUNT'].apply(lambda x: '' if np.isnan(x) else str(round(x)))
+	cdfn = cdfn.fillna('')
+	#pdb.set_trace()
+	cdfn.loc[:,"VERSIONDATE"] = cdfn.loc[:,"VERSIONDATE"].apply(lambda x: str(x)[0:10])
+	cdfn.loc[:,"VERSIONDATE"] = cdfn.loc[:,"VERSIONDATE"].apply(lambda x: '' if x == 'NaT' else x)
+	cdfn.rename(columns={'COMP.':'COMP'}, inplace=True)
+	#cdfn.loc[:,'PARC_COUNT'] = cdfn.loc[:,'PARC_COUNT'].apply(lambda x: '' if not x.isdigit() else x)
+	#for state, statecounties in cdfn.groupby(level=0):
+	#	for i,row in statecounties.iterrows():
+	#		print(row)
+
+	#pdb.set_trace()
+	reshtml = render_template("ordergeneratorgrouped.html",counties = cdfn, states = states)
+	with open('./templates/parcelcat.html','w') as fw:
+		fw.write(reshtml)
+		fw.close()
+	return reshtml
 
 @app.route('/blogtitles', methods=['GET'])
 def blogtitles():
@@ -276,6 +276,13 @@ def sendquoterequest():
 	sendername = request.form.get('FirstName') + " " + request.form.get('LastName')
 	sendEmail(sendername, senderemail, message)
 	return render_template("requestsent.html")
+
+@app.route('/wizardbatchdone', methods=['POST'])
+def wizardBatchComplete():
+	data = request.get_json()
+	cntys = data['fips']
+	recipients = ['grbtxtmsg@gmail.com','dklien@boundarysolutions.com']
+	sendEmail("Wizard",'dklien@boundarysolution.com',f'wizard has finished processing counties:{','.join(cntys)}')
 
 
 @app.route('/requests')
