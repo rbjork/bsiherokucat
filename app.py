@@ -274,7 +274,8 @@ def sendquoterequest():
 	recipients = ['ronaldbjork@sbcglobal.net','INFO@boundarysolutions.com']
 	#sendEmailByAPIGateway(sender,subject,message)
 	sendername = request.form.get('FirstName') + " " + request.form.get('LastName')
-	sendEmail(sendername, senderemail, message)
+	subject = "Request For Quote"
+	sendEmail(subject,sendername, senderemail, message)
 	return render_template("requestsent.html")
 
 @app.route('/wizardbatchdone', methods=['POST'])
@@ -284,7 +285,8 @@ def wizardBatchComplete():
 	metafilename = data['metafile']
 	link = data['link']
 	recipients = ['grbtxtmsg@gmail.com','dklien@boundarysolutions.com']
-	sendEmail("Wizard",'dklien@boundarysolution.com',
+	subject = "Wizard Complete"
+	sendEmail(subject,"Wizard",'dklien@boundarysolution.com',
 		f'Wizard has finished processing counties:{",".join(cntys)}\n TO VIEW, LINK:{link}/{metafilename}')
 
 
@@ -419,7 +421,7 @@ def sendEmailNPN(customername, customeremail, text, token=''):
 		print ("Login and Email sent!")
 
 
-def sendEmail(customername, customeremail, text, token=''):
+def sendEmail(subject, customername, customeremail, text, token=''):
 
 	mailertogo_port     = environ.get('MAILERTOGO_SMTP_PORT', 587)
 	mailertogo_host     = environ.get('MAILERTOGO_SMTP_HOST')
@@ -441,7 +443,7 @@ def sendEmail(customername, customeremail, text, token=''):
 	recipient_email = 'dklein@boundarysolutions.com' # change to recipient email. Make sure to use a real email address in your tests to avoid hard bounces and protect your reputation as a sender.
 	recipient_name = 'Dennis'
 	# subject
-	subject = 'Request For Quote'
+	#subject = 'Request For Quote'
 	# text body
 	body_plain = (text)
 	# html body
