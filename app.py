@@ -281,8 +281,11 @@ def sendquoterequest():
 def wizardBatchComplete():
 	data = request.get_json()
 	cntys = data['fips']
+	metafilename = data['metafile']
+	link = data['link']
 	recipients = ['grbtxtmsg@gmail.com','dklien@boundarysolutions.com']
-	sendEmail("Wizard",'dklien@boundarysolution.com',f'wizard has finished processing counties:{','.join(cntys)}')
+	sendEmail("Wizard",'dklien@boundarysolution.com',
+		f'Wizard has finished processing counties:{",".join(cntys)}\n TO VIEW, LINK:{link}/{metafilename}')
 
 
 @app.route('/requests')
