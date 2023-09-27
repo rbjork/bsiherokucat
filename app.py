@@ -284,10 +284,14 @@ def wizardBatchComplete():
 	cntys = data['fips']
 	metafilename = data['metafile']
 	link = data['link']
+	if 'time' in data:
+		t = int(data['time'])/60
+	else:
+		t = 0
 	recipients = ['grbtxtmsg@gmail.com','dklien@boundarysolutions.com']
 	subject = "Wizard Complete"
 	sendEmail(subject,"Wizard",'dklien@boundarysolution.com',
-		f'Wizard has finished processing counties:{",".join(cntys)}\n TO VIEW, LINK:{link}/{metafilename}')
+		f'Wizard has finished processing counties:{",".join(cntys)}\n Took {t} minutes to process. \n TO VIEW, LINK:{link}/{metafilename}')
 
 
 @app.route('/requests')
